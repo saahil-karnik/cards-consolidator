@@ -5,8 +5,8 @@
 package view;
 
 /**
- *
- * @author rishabhkaushick
+ * 
+ * @author team4
  */
 public class PromotionsPanel extends javax.swing.JPanel {
 
@@ -26,19 +26,262 @@ public class PromotionsPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jSplitPane1 = new javax.swing.JSplitPane();
+        jPanel1 = new javax.swing.JPanel();
+        cardPromoButton1 = new javax.swing.JButton();
+        cardPromoButton2 = new javax.swing.JButton();
+        cardPromoButton3 = new javax.swing.JButton();
+        cardPromoButton4 = new javax.swing.JButton();
+        cardPromoButton5 = new javax.swing.JButton();
+        cardPromoButton6 = new javax.swing.JButton();
+        cardPromoButton7 = new javax.swing.JButton();
+        cardPromoButton8 = new javax.swing.JButton();
+        cardPromoButton9 = new javax.swing.JButton();
+        allCardsButton = new javax.swing.JButton();
+        cardPromoButton10 = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+
+        jSplitPane1.setDividerLocation(200);
+
+        cardPromoButton1.setBackground(new java.awt.Color(0, 102, 255));
+        cardPromoButton1.setFont(new java.awt.Font("Annai MN", 0, 12)); // NOI18N
+        cardPromoButton1.setForeground(new java.awt.Color(255, 255, 255));
+        cardPromoButton1.setText("KrisFlyer");
+        cardPromoButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cardPromoButton1ActionPerformed(evt);
+            }
+        });
+
+        cardPromoButton2.setBackground(new java.awt.Color(0, 102, 255));
+        cardPromoButton2.setFont(new java.awt.Font("Annai MN", 0, 12)); // NOI18N
+        cardPromoButton2.setForeground(new java.awt.Color(255, 255, 255));
+        cardPromoButton2.setText("Tim Hortons");
+        cardPromoButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cardPromoButton2ActionPerformed(evt);
+            }
+        });
+
+        cardPromoButton3.setBackground(new java.awt.Color(0, 102, 255));
+        cardPromoButton3.setFont(new java.awt.Font("Annai MN", 0, 12)); // NOI18N
+        cardPromoButton3.setForeground(new java.awt.Color(255, 255, 255));
+        cardPromoButton3.setText("Scene");
+
+        cardPromoButton4.setBackground(new java.awt.Color(0, 102, 255));
+        cardPromoButton4.setFont(new java.awt.Font("Annai MN", 0, 12)); // NOI18N
+        cardPromoButton4.setForeground(new java.awt.Color(255, 255, 255));
+        cardPromoButton4.setText("Aeroplan");
+
+        cardPromoButton5.setBackground(new java.awt.Color(0, 102, 255));
+        cardPromoButton5.setFont(new java.awt.Font("Annai MN", 0, 12)); // NOI18N
+        cardPromoButton5.setForeground(new java.awt.Color(255, 255, 255));
+        cardPromoButton5.setText("Starbucks");
+        cardPromoButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cardPromoButton5ActionPerformed(evt);
+            }
+        });
+
+        cardPromoButton6.setBackground(new java.awt.Color(0, 102, 255));
+        cardPromoButton6.setFont(new java.awt.Font("Annai MN", 0, 12)); // NOI18N
+        cardPromoButton6.setForeground(new java.awt.Color(255, 255, 255));
+        cardPromoButton6.setText("Points");
+        cardPromoButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cardPromoButton6ActionPerformed(evt);
+            }
+        });
+
+        cardPromoButton7.setBackground(new java.awt.Color(0, 102, 255));
+        cardPromoButton7.setFont(new java.awt.Font("Annai MN", 0, 12)); // NOI18N
+        cardPromoButton7.setForeground(new java.awt.Color(255, 255, 255));
+        cardPromoButton7.setText("H & M");
+        cardPromoButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cardPromoButton7ActionPerformed(evt);
+            }
+        });
+
+        cardPromoButton8.setBackground(new java.awt.Color(0, 102, 255));
+        cardPromoButton8.setFont(new java.awt.Font("Annai MN", 0, 12)); // NOI18N
+        cardPromoButton8.setForeground(new java.awt.Color(255, 255, 255));
+        cardPromoButton8.setText("UNIQLO");
+        cardPromoButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cardPromoButton8ActionPerformed(evt);
+            }
+        });
+
+        cardPromoButton9.setBackground(new java.awt.Color(0, 102, 255));
+        cardPromoButton9.setFont(new java.awt.Font("Annai MN", 0, 12)); // NOI18N
+        cardPromoButton9.setForeground(new java.awt.Color(255, 255, 255));
+        cardPromoButton9.setText("PC Optimum");
+        cardPromoButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cardPromoButton9ActionPerformed(evt);
+            }
+        });
+
+        allCardsButton.setBackground(new java.awt.Color(0, 102, 255));
+        allCardsButton.setFont(new java.awt.Font("Annai MN", 0, 12)); // NOI18N
+        allCardsButton.setForeground(new java.awt.Color(255, 255, 255));
+        allCardsButton.setText("All Cards");
+        allCardsButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                allCardsButtonActionPerformed(evt);
+            }
+        });
+
+        cardPromoButton10.setBackground(new java.awt.Color(0, 102, 255));
+        cardPromoButton10.setFont(new java.awt.Font("Annai MN", 0, 12)); // NOI18N
+        cardPromoButton10.setForeground(new java.awt.Color(255, 255, 255));
+        cardPromoButton10.setText("PC Optimum");
+        cardPromoButton10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cardPromoButton10ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(47, 47, 47)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(cardPromoButton9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cardPromoButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cardPromoButton7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cardPromoButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cardPromoButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cardPromoButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cardPromoButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cardPromoButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cardPromoButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(allCardsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cardPromoButton10, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(48, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addComponent(allCardsButton)
+                .addGap(18, 18, 18)
+                .addComponent(cardPromoButton2)
+                .addGap(18, 18, 18)
+                .addComponent(cardPromoButton3)
+                .addGap(18, 18, 18)
+                .addComponent(cardPromoButton4)
+                .addGap(18, 18, 18)
+                .addComponent(cardPromoButton5)
+                .addGap(18, 18, 18)
+                .addComponent(cardPromoButton6)
+                .addGap(18, 18, 18)
+                .addComponent(cardPromoButton7)
+                .addGap(18, 18, 18)
+                .addComponent(cardPromoButton8)
+                .addGap(18, 18, 18)
+                .addComponent(cardPromoButton9)
+                .addGap(18, 18, 18)
+                .addComponent(cardPromoButton1)
+                .addGap(18, 18, 18)
+                .addComponent(cardPromoButton10)
+                .addGap(26, 26, 26))
+        );
+
+        jSplitPane1.setLeftComponent(jPanel1);
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel1.setFont(new java.awt.Font("Arima Koshi", 0, 18)); // NOI18N
+        jLabel1.setText("The Title of Card");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(241, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(222, 222, 222))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addComponent(jLabel1)
+                .addContainerGap(445, Short.MAX_VALUE))
+        );
+
+        jSplitPane1.setRightComponent(jPanel2);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(jSplitPane1)
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void cardPromoButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cardPromoButton5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cardPromoButton5ActionPerformed
+
+    private void cardPromoButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cardPromoButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cardPromoButton2ActionPerformed
+
+    private void cardPromoButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cardPromoButton6ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cardPromoButton6ActionPerformed
+
+    private void cardPromoButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cardPromoButton7ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cardPromoButton7ActionPerformed
+
+    private void cardPromoButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cardPromoButton8ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cardPromoButton8ActionPerformed
+
+    private void cardPromoButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cardPromoButton9ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cardPromoButton9ActionPerformed
+
+    private void allCardsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_allCardsButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_allCardsButtonActionPerformed
+
+    private void cardPromoButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cardPromoButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cardPromoButton1ActionPerformed
+
+    private void cardPromoButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cardPromoButton10ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cardPromoButton10ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton allCardsButton;
+    private javax.swing.JButton cardPromoButton1;
+    private javax.swing.JButton cardPromoButton10;
+    private javax.swing.JButton cardPromoButton2;
+    private javax.swing.JButton cardPromoButton3;
+    private javax.swing.JButton cardPromoButton4;
+    private javax.swing.JButton cardPromoButton5;
+    private javax.swing.JButton cardPromoButton6;
+    private javax.swing.JButton cardPromoButton7;
+    private javax.swing.JButton cardPromoButton8;
+    private javax.swing.JButton cardPromoButton9;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JSplitPane jSplitPane1;
     // End of variables declaration//GEN-END:variables
 }
