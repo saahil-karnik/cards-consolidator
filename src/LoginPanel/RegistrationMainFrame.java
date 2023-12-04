@@ -6,6 +6,7 @@ package LoginPanel;
 
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -41,7 +42,6 @@ public class RegistrationMainFrame extends javax.swing.JFrame {
         emailLabel = new javax.swing.JLabel();
         nameTextField = new javax.swing.JTextField();
         dobLabel = new javax.swing.JLabel();
-        passwordTextField = new javax.swing.JTextField();
         emailLabel1 = new javax.swing.JLabel();
         emailTextField = new javax.swing.JTextField();
         submitButton = new javax.swing.JButton();
@@ -49,6 +49,7 @@ public class RegistrationMainFrame extends javax.swing.JFrame {
         emailErrorLabel = new javax.swing.JLabel();
         passwordErrorLabel = new javax.swing.JLabel();
         JDateChooser = new com.toedter.calendar.JDateChooser();
+        JPasswordField = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(835, 654));
@@ -104,12 +105,6 @@ public class RegistrationMainFrame extends javax.swing.JFrame {
         dobLabel.setFont(new java.awt.Font("Kailasa", 1, 18)); // NOI18N
         dobLabel.setText("DOB:");
 
-        passwordTextField.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                passwordTextFieldKeyTyped(evt);
-            }
-        });
-
         emailLabel1.setFont(new java.awt.Font("Kailasa", 1, 18)); // NOI18N
         emailLabel1.setText("Password:");
 
@@ -143,12 +138,18 @@ public class RegistrationMainFrame extends javax.swing.JFrame {
             }
         });
 
+        JPasswordField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JPasswordFieldActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout mainPanel2Layout = new javax.swing.GroupLayout(mainPanel2);
         mainPanel2.setLayout(mainPanel2Layout);
         mainPanel2Layout.setHorizontalGroup(
             mainPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanel2Layout.createSequentialGroup()
-                .addGap(0, 94, Short.MAX_VALUE)
+                .addGap(0, 164, Short.MAX_VALUE)
                 .addComponent(RegistrationPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(117, 117, 117))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanel2Layout.createSequentialGroup()
@@ -167,16 +168,16 @@ public class RegistrationMainFrame extends javax.swing.JFrame {
                         .addComponent(submitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(mainPanel2Layout.createSequentialGroup()
                         .addGroup(mainPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(JDateChooser, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(JDateChooser, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 364, Short.MAX_VALUE)
                             .addComponent(nameTextField, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(emailTextField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 294, Short.MAX_VALUE)
-                            .addComponent(passwordTextField, javax.swing.GroupLayout.Alignment.LEADING))
+                            .addComponent(emailTextField)
+                            .addComponent(JPasswordField, javax.swing.GroupLayout.Alignment.LEADING))
                         .addGap(44, 44, 44)
                         .addGroup(mainPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(passwordErrorLabel)
                             .addComponent(emailErrorLabel)
                             .addComponent(nameErrorLabel))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(266, Short.MAX_VALUE))
         );
         mainPanel2Layout.setVerticalGroup(
             mainPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -205,11 +206,11 @@ public class RegistrationMainFrame extends javax.swing.JFrame {
                 .addComponent(emailLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(mainPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(passwordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(passwordErrorLabel))
+                    .addComponent(passwordErrorLabel)
+                    .addComponent(JPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(submitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addGap(17, 17, 17))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -219,14 +220,14 @@ public class RegistrationMainFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(mainPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(684, Short.MAX_VALUE))
+                .addContainerGap(614, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(mainPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(494, Short.MAX_VALUE))
+                .addContainerGap(489, Short.MAX_VALUE))
         );
 
         pack();
@@ -237,12 +238,13 @@ public class RegistrationMainFrame extends javax.swing.JFrame {
         String name = nameTextField.getText();
         String email = emailTextField.getText();
         Date dob = JDateChooser.getDate();
-        String password = passwordTextField.getText();
+        char[] passwordChar = JPasswordField.getPassword();
+        String password = new String(passwordChar);
 
         if (name.isEmpty() || email.isEmpty() || password.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Please fill in all required fields", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
-            JOptionPane.showMessageDialog(this, "Name: " + name + "\nEmail: " + email + "\nDOB: " + dob + "\nPassword: " + password, "Successfully Registered", JOptionPane.INFORMATION_MESSAGE);  
+            JOptionPane.showMessageDialog(this, "Name: " + name + "\nEmail: " + email + "\nDOB: " + dob, "Successfully Registered", JOptionPane.INFORMATION_MESSAGE);  
             LoginMainFrame loginFrame = new LoginMainFrame();
             loginFrame.setVisible(true);
             this.dispose();    
@@ -273,19 +275,6 @@ public class RegistrationMainFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_emailTextFieldKeyTyped
 
-    private void passwordTextFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passwordTextFieldKeyTyped
-        // TODO add your handling code here:
-        String passwordRegex = "^(?=.*[0-9])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$";
-        Pattern pattern = Pattern.compile(passwordRegex);
-        Matcher matcher = pattern.matcher(passwordTextField.getText());
-
-        if (!matcher.matches()) {
-            passwordErrorLabel.setText("Invalid Password!");
-        } else {
-            passwordErrorLabel.setText(null);
-        }
-    }//GEN-LAST:event_passwordTextFieldKeyTyped
-
     private void nameTextFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nameTextFieldKeyTyped
         // TODO add your handling code here:
         String name = nameTextField.getText();
@@ -308,7 +297,25 @@ public class RegistrationMainFrame extends javax.swing.JFrame {
             // Handle the case where no date is selected
             System.out.println("Please select a valid date of birth.");
         }
+
     }//GEN-LAST:event_JDateChooserKeyPressed
+
+    private void JPasswordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JPasswordFieldActionPerformed
+        // TODO add your handling code here:
+        char[] passwordChar = JPasswordField.getPassword();
+        String userEnteredPassword = new String(passwordChar);
+
+        String passwordRegex = "^(?=.*[0-9])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$";
+        Pattern pattern = Pattern.compile(passwordRegex);
+        Matcher matcher = pattern.matcher(userEnteredPassword);
+
+        if (!matcher.matches()) {
+            passwordErrorLabel.setText("Invalid Password!");
+        } else {
+            passwordErrorLabel.setText(null);
+        }
+
+    }//GEN-LAST:event_JPasswordFieldActionPerformed
 
     /**
      * @param args the command line arguments
@@ -347,6 +354,7 @@ public class RegistrationMainFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.toedter.calendar.JDateChooser JDateChooser;
+    private javax.swing.JPasswordField JPasswordField;
     private javax.swing.JPanel RegistrationPanel;
     private javax.swing.JLabel RegistrationTitleLabel;
     private javax.swing.JLabel dobLabel;
@@ -359,7 +367,6 @@ public class RegistrationMainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel nameLabel;
     private javax.swing.JTextField nameTextField;
     private javax.swing.JLabel passwordErrorLabel;
-    private javax.swing.JTextField passwordTextField;
     private javax.swing.JButton submitButton;
     private javax.swing.JLabel titleLabel;
     // End of variables declaration//GEN-END:variables

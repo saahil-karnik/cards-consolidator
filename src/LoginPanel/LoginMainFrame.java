@@ -7,7 +7,6 @@ package LoginPanel;
 import java.awt.Font;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.Base64;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
@@ -26,14 +25,22 @@ public class LoginMainFrame extends javax.swing.JFrame {
         initComponents();
     }
 
-    private String hashPassword(String password) {
+    private static String hashPassword(String password) {
         try {
-            MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
-            byte[] hashBytes = messageDigest.digest(password.getBytes());
-            return Base64.getEncoder().encodeToString(hashBytes);
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            byte[] hashedBytes = md.digest(password.getBytes());
+
+            // Convert the byte array to a hexadecimal string
+            StringBuilder stringBuilder = new StringBuilder();
+            for (byte b : hashedBytes) {
+                stringBuilder.append(String.format("%02x", b));
+            }
+
+            return stringBuilder.toString();
         } catch (NoSuchAlgorithmException e) {
-            // Handle the exception as needed
-            return password;
+            // Handle the exception appropriately (e.g., log it)
+            e.printStackTrace();
+            return null;
         }
     }
 
@@ -50,17 +57,18 @@ public class LoginMainFrame extends javax.swing.JFrame {
         titleLabel = new javax.swing.JLabel();
         emailLabel = new javax.swing.JLabel();
         passwordLabel = new javax.swing.JLabel();
-        passwordTextField = new javax.swing.JTextField();
         emailTextField = new javax.swing.JTextField();
         loginButton = new javax.swing.JButton();
         dontHaveAnAccountLabel = new javax.swing.JLabel();
         registerLabel = new javax.swing.JLabel();
         invalidEmailLabel = new javax.swing.JLabel();
         passwordErrorLabel = new javax.swing.JLabel();
+        JPasswordField = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         mainPanel.setBackground(new java.awt.Color(255, 255, 255));
+        mainPanel.setPreferredSize(new java.awt.Dimension(870, 605));
 
         titleLabel.setBackground(new java.awt.Color(0, 102, 204));
         titleLabel.setFont(new java.awt.Font("Kailasa", 1, 48)); // NOI18N
@@ -72,17 +80,6 @@ public class LoginMainFrame extends javax.swing.JFrame {
 
         passwordLabel.setFont(new java.awt.Font("Kailasa", 1, 18)); // NOI18N
         passwordLabel.setText("Password:");
-
-        passwordTextField.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                passwordTextFieldMousePressed(evt);
-            }
-        });
-        passwordTextField.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                passwordTextFieldKeyPressed(evt);
-            }
-        });
 
         emailTextField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -123,6 +120,17 @@ public class LoginMainFrame extends javax.swing.JFrame {
         passwordErrorLabel.setFont(new java.awt.Font("Arial Hebrew Scholar", 1, 14)); // NOI18N
         passwordErrorLabel.setForeground(new java.awt.Color(255, 51, 51));
 
+        JPasswordField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JPasswordFieldActionPerformed(evt);
+            }
+        });
+        JPasswordField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                JPasswordFieldKeyTyped(evt);
+            }
+        });
+
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
         mainPanel.setLayout(mainPanelLayout);
         mainPanelLayout.setHorizontalGroup(
@@ -134,23 +142,24 @@ public class LoginMainFrame extends javax.swing.JFrame {
                         .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(emailLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(passwordLabel)
-                            .addComponent(passwordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(loginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(mainPanelLayout.createSequentialGroup()
-                                .addGap(25, 25, 25)
-                                .addComponent(dontHaveAnAccountLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(registerLabel))
-                            .addGroup(mainPanelLayout.createSequentialGroup()
-                                .addComponent(emailTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(JPasswordField, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(emailTextField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE))
                                 .addGap(55, 55, 55)
                                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(passwordErrorLabel)
-                                    .addComponent(invalidEmailLabel)))))
+                                    .addComponent(invalidEmailLabel)))
+                            .addComponent(loginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(mainPanelLayout.createSequentialGroup()
                         .addGap(111, 111, 111)
-                        .addComponent(titleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 444, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(245, Short.MAX_VALUE))
+                        .addComponent(titleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 444, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(mainPanelLayout.createSequentialGroup()
+                        .addGap(219, 219, 219)
+                        .addComponent(dontHaveAnAccountLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(registerLabel)))
+                .addContainerGap(315, Short.MAX_VALUE))
         );
         mainPanelLayout.setVerticalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -166,16 +175,16 @@ public class LoginMainFrame extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(passwordLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(passwordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(passwordErrorLabel))
-                .addGap(30, 30, 30)
+                .addComponent(JPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(15, 15, 15)
                 .addComponent(loginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(passwordErrorLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(dontHaveAnAccountLabel)
                     .addComponent(registerLabel))
-                .addContainerGap(174, Short.MAX_VALUE))
+                .addContainerGap(192, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -185,14 +194,14 @@ public class LoginMainFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(48, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -212,37 +221,27 @@ public class LoginMainFrame extends javax.swing.JFrame {
 
     }//GEN-LAST:event_emailTextFieldKeyTyped
 
-    private void passwordTextFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passwordTextFieldKeyPressed
-        // Minimum 8 characters followed by at least one special character, and at least one numeric valu
-        
-        String passwordRegex = "^(?=.*[0-9])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$";
-        String userEnteredPassword = passwordTextField.getText(); 
-        String hashedPassword = hashPassword(userEnteredPassword);
-        System.out.println("Hashed Password: " + hashedPassword);
-        
-        Pattern pattern = Pattern.compile(passwordRegex);
-        Matcher matcher = pattern.matcher(passwordTextField.getText());
-
-        if (!matcher.matches()) {
-            passwordErrorLabel.setText("Invalid Password!");
-        } else {
-            passwordErrorLabel.setText(null);    
-            
-        }
-    }//GEN-LAST:event_passwordTextFieldKeyPressed
-
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
         // TODO add your handling code here:
         String email = emailTextField.getText();
-        String password = passwordTextField.getText();
-        
+        char[] passwordChar = JPasswordField.getPassword();
+        String password = new String(passwordChar);
+
         if (email.isEmpty() || password.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Please fill in all required fields", "Error", JOptionPane.ERROR_MESSAGE);
-                } else {
-            JOptionPane.showMessageDialog(this, "\nEmail: " + email + "\nPassword: " + password, "Successfully Registered", JOptionPane.INFORMATION_MESSAGE);     
-        
-        JOptionPane.showMessageDialog(null, "Successfully Login", "User Information", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(null, "Please fill in all required fields", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            try {
+            String hashedPassword = hashPassword(password);
+            System.out.println("Hashed Password: " + hashedPassword);
+
+            JOptionPane.showMessageDialog(this, "\nEmail: " + email + "\nSuccess ", "Successfully Registered", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Successfully Login", "User Information", JOptionPane.INFORMATION_MESSAGE);
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+            
+    }
     }//GEN-LAST:event_loginButtonActionPerformed
 
     private void registerLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_registerLabelMouseClicked
@@ -264,9 +263,69 @@ public class LoginMainFrame extends javax.swing.JFrame {
         registerLabel.setFont(font.deriveFont(Font.PLAIN));
     }//GEN-LAST:event_registerLabelMouseExited
 
-    private void passwordTextFieldMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_passwordTextFieldMousePressed
-        // TODO add your handling code here:    
-    }//GEN-LAST:event_passwordTextFieldMousePressed
+    private void JPasswordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JPasswordFieldActionPerformed
+        // TODO add your handling code here:
+//        char[] passwordChar = JPasswordField.getPassword();
+//        String userEnteredPassword = new String(passwordChar);
+//        
+//        System.out.println("Before hashPassword method call");
+//        System.out.println("User Entered Password: " + userEnteredPassword);
+//
+//        String passwordRegex = "^(?=.*[0-9])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$";
+//        Pattern pattern = Pattern.compile(passwordRegex);
+//        Matcher matcher = pattern.matcher(userEnteredPassword);
+//
+//        if (!matcher.matches()) {
+//            passwordErrorLabel.setText("Invalid Password!");
+//        } else {
+//            try {
+//                String hashedPassword = hashPassword(userEnteredPassword);
+//                System.out.println("After hashPassword method call");
+//
+//                System.out.println("Hashed Password: " + hashedPassword);
+//                passwordErrorLabel.setText(null);
+//            } catch (Exception e) {
+//        // Print any exceptions that might occur during hashing
+//                   e.printStackTrace();
+//        }
+//   }
+        char[] passwordChar = JPasswordField.getPassword();
+        String userEnteredPassword = new String(passwordChar);
+        
+        System.out.println("User Entered Password: " + userEnteredPassword);
+
+        String passwordRegex = "^(?=.*[0-9])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$";
+        Pattern pattern = Pattern.compile(passwordRegex);
+        Matcher matcher = pattern.matcher(userEnteredPassword);
+
+        if (!matcher.matches()) {
+            passwordErrorLabel.setText("Invalid Password!");
+        } else {
+                
+            passwordErrorLabel.setText(null);
+  
+   }
+    }//GEN-LAST:event_JPasswordFieldActionPerformed
+
+    private void JPasswordFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JPasswordFieldKeyTyped
+        // TODO add your handling code here:
+//        char[] passwordChar = JPasswordField.getPassword();
+//        String userEnteredPassword = new String(passwordChar);
+//        
+//        System.out.println("User Entered Password: " + userEnteredPassword);
+//
+//        String passwordRegex = "^(?=.*[0-9])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$";
+//        Pattern pattern = Pattern.compile(passwordRegex);
+//        Matcher matcher = pattern.matcher(userEnteredPassword);
+//
+//        if (!matcher.matches()) {
+//            passwordErrorLabel.setText("Invalid Password!");
+//        } else {
+//                
+//            passwordErrorLabel.setText(null);
+//  
+//   }
+    }//GEN-LAST:event_JPasswordFieldKeyTyped
 
     /**
      * @param args the command line arguments
@@ -304,6 +363,7 @@ public class LoginMainFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPasswordField JPasswordField;
     private javax.swing.JLabel dontHaveAnAccountLabel;
     private javax.swing.JLabel emailLabel;
     private javax.swing.JTextField emailTextField;
@@ -312,7 +372,6 @@ public class LoginMainFrame extends javax.swing.JFrame {
     private javax.swing.JPanel mainPanel;
     private javax.swing.JLabel passwordErrorLabel;
     private javax.swing.JLabel passwordLabel;
-    private javax.swing.JTextField passwordTextField;
     private javax.swing.JLabel registerLabel;
     private javax.swing.JLabel titleLabel;
     // End of variables declaration//GEN-END:variables
