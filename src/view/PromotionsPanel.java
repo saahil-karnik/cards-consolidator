@@ -3,6 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package view;
+import java.util.ArrayList;
+import javax.swing.JPanel;
 
 /**
  * 
@@ -10,10 +12,13 @@ package view;
  */
 public class PromotionsPanel extends javax.swing.JPanel {
 
+    private JPanel bottomPanel;
     /**
-     * Creates new form PromotionsPanel
+     * Constructor of the PromotionsPanel takes in the bottomPanel as argument.
+     * @param bottomPanel Bottom Panel
      */
-    public PromotionsPanel() {
+    public PromotionsPanel(JPanel bottomPanel) {
+        this.bottomPanel = bottomPanel;
         initComponents();
     }
 
@@ -26,6 +31,7 @@ public class PromotionsPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jComboBox1 = new javax.swing.JComboBox<>();
         jSplitPane1 = new javax.swing.JSplitPane();
         jPanel1 = new javax.swing.JPanel();
         cardPromoButton1 = new javax.swing.JButton();
@@ -40,7 +46,15 @@ public class PromotionsPanel extends javax.swing.JPanel {
         allCardsButton = new javax.swing.JButton();
         cardPromoButton10 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        promotionsTitleLabel = new javax.swing.JLabel();
+        promotionMessageLabel1 = new javax.swing.JLabel();
+        promotionEligibilityLabel1 = new javax.swing.JLabel();
+        promotionMessageLabel2 = new javax.swing.JLabel();
+        promotionEligibilityLabel2 = new javax.swing.JLabel();
+        promotionMessageLabel3 = new javax.swing.JLabel();
+        promotionEligibilityLabel3 = new javax.swing.JLabel();
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jSplitPane1.setDividerLocation(200);
 
@@ -189,31 +203,71 @@ public class PromotionsPanel extends javax.swing.JPanel {
                 .addComponent(cardPromoButton1)
                 .addGap(18, 18, 18)
                 .addComponent(cardPromoButton10)
-                .addGap(26, 26, 26))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         jSplitPane1.setLeftComponent(jPanel1);
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel1.setFont(new java.awt.Font("Arima Koshi", 0, 18)); // NOI18N
-        jLabel1.setText("The Title of Card");
+        promotionsTitleLabel.setFont(new java.awt.Font("Annai MN", 0, 18)); // NOI18N
+        promotionsTitleLabel.setText("Top Promotions!");
+
+        promotionMessageLabel1.setFont(new java.awt.Font("Annai MN", 0, 12)); // NOI18N
+        promotionMessageLabel1.setText("Promotion Message");
+
+        promotionEligibilityLabel1.setFont(new java.awt.Font("Annai MN", 0, 12)); // NOI18N
+        promotionEligibilityLabel1.setText("Promotion Eligibility");
+
+        promotionMessageLabel2.setFont(new java.awt.Font("Annai MN", 0, 12)); // NOI18N
+        promotionMessageLabel2.setText("Promotion Message");
+
+        promotionEligibilityLabel2.setFont(new java.awt.Font("Annai MN", 0, 12)); // NOI18N
+        promotionEligibilityLabel2.setText("Promotion Eligibility");
+
+        promotionMessageLabel3.setFont(new java.awt.Font("Annai MN", 0, 12)); // NOI18N
+        promotionMessageLabel3.setText("Promotion Message");
+
+        promotionEligibilityLabel3.setFont(new java.awt.Font("Annai MN", 0, 12)); // NOI18N
+        promotionEligibilityLabel3.setText("Promotion Eligibility");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(241, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(222, 222, 222))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(promotionsTitleLabel)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(153, 153, 153)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(promotionEligibilityLabel3)
+                    .addComponent(promotionMessageLabel3)
+                    .addComponent(promotionEligibilityLabel2)
+                    .addComponent(promotionMessageLabel2)
+                    .addComponent(promotionEligibilityLabel1)
+                    .addComponent(promotionMessageLabel1))
+                .addContainerGap(326, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(31, 31, 31)
-                .addComponent(jLabel1)
-                .addContainerGap(445, Short.MAX_VALUE))
+                .addComponent(promotionsTitleLabel)
+                .addGap(50, 50, 50)
+                .addComponent(promotionMessageLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(promotionEligibilityLabel1)
+                .addGap(75, 75, 75)
+                .addComponent(promotionMessageLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(promotionEligibilityLabel2)
+                .addGap(75, 75, 75)
+                .addComponent(promotionMessageLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(promotionEligibilityLabel3)
+                .addContainerGap(109, Short.MAX_VALUE))
         );
 
         jSplitPane1.setRightComponent(jPanel2);
@@ -222,7 +276,7 @@ public class PromotionsPanel extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)
+            .addComponent(jSplitPane1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -235,7 +289,17 @@ public class PromotionsPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_cardPromoButton5ActionPerformed
 
     private void cardPromoButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cardPromoButton2ActionPerformed
-        // TODO add your handling code here:
+        /** Currently Tim Horton's is hard-coded but this value will be dynamic. */
+        ArrayList <String> cardPromotions = getCardPromotions("Tim Hortons");
+        promotionsTitleLabel.setText(cardPromotions.get(0));
+        
+        /** Setting the all promotion labels as visible*/
+        setAllPromotionLabelsVisible();
+        
+        /** Displaying the promotions into the labels */
+        displayPromotionsInLabels(cardPromotions);
+        
+        
     }//GEN-LAST:event_cardPromoButton2ActionPerformed
 
     private void cardPromoButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cardPromoButton6ActionPerformed
@@ -254,8 +318,20 @@ public class PromotionsPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_cardPromoButton9ActionPerformed
 
+    /**
+     * This is when the 'All Cards' button is clicked.
+     * This will show the promotions of all the top promotions from all of users loyalty cards.
+     * @param evt 
+     */
     private void allCardsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_allCardsButtonActionPerformed
-        // TODO add your handling code here:
+        ArrayList <String> allCardPromotions = getCardPromotions("All");
+        promotionsTitleLabel.setText(allCardPromotions.get(0));
+
+        /** First set all the promotion labels to visible */
+        setAllPromotionLabelsVisible();
+        
+        /** Displaying the promotions into the labels */
+        displayPromotionsInLabels(allCardPromotions);
     }//GEN-LAST:event_allCardsButtonActionPerformed
 
     private void cardPromoButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cardPromoButton1ActionPerformed
@@ -279,9 +355,107 @@ public class PromotionsPanel extends javax.swing.JPanel {
     private javax.swing.JButton cardPromoButton7;
     private javax.swing.JButton cardPromoButton8;
     private javax.swing.JButton cardPromoButton9;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JSplitPane jSplitPane1;
+    private javax.swing.JLabel promotionEligibilityLabel1;
+    private javax.swing.JLabel promotionEligibilityLabel2;
+    private javax.swing.JLabel promotionEligibilityLabel3;
+    private javax.swing.JLabel promotionMessageLabel1;
+    private javax.swing.JLabel promotionMessageLabel2;
+    private javax.swing.JLabel promotionMessageLabel3;
+    private javax.swing.JLabel promotionsTitleLabel;
     // End of variables declaration//GEN-END:variables
+
+    /**
+     * Based on the card title parameter, it retrieves the promotions from the database and returns it in an array list.
+     * The valid values for the cardTitle parameter are: 'All', 'Tim Hortons', 'Starbucks'.
+     * @param cardTitle Name of Card
+     * @return Array List of Strings
+     */
+    public ArrayList <String> getCardPromotions(String cardTitle){
+        /**
+         * The promotionsArray is an Array List of Strings.
+         * It will hold 4 main elements:
+         * promotionsArray[0] - Promotions Title Label
+         * promotionsArray[1] - Promotion Message
+         * promotionsArray[2] - Promotion Eligibility
+         * Additionally if there are more than 1 promotions it will also hold:
+         * promotionsArray[3] - Promotion Message
+         * promotionsArray[4] - Promotion Eligibility
+         * ...
+         * and so forth.
+         */
+        ArrayList <String> promotionsArray = new ArrayList<String>();
+        if(cardTitle.equals("All")){
+            promotionsArray.add("Top Promotions!");
+            /** Here we need to get the best promotions for all the cards. */
+            /** Call the database. */
+            /** Loop over database items. */
+            for (int i=0; i<3; i++){
+                promotionsArray.add("Promotion Message");
+                promotionsArray.add("Promotion Eligibility");
+            }
+            return promotionsArray;
+        } else if(cardTitle.equals("Tim Hortons")){
+            promotionsArray.add("Tim Hortons Promotions!");
+            /** Here we need to get a call to the database to retrieve the Tim's promotions. */
+            // for now displaying some dummy data
+            promotionsArray.add("Get 5% off on your Latte now!!");
+            promotionsArray.add("Eligibility: "+Integer.toString(500)+" points");
+        }
+        return promotionsArray;
+    }
+    
+    public void setAllPromotionLabelsVisible(){
+        promotionMessageLabel1.setVisible(true);
+        promotionEligibilityLabel1.setVisible(true);
+        promotionMessageLabel2.setVisible(true);
+        promotionEligibilityLabel2.setVisible(true);
+        promotionMessageLabel3.setVisible(true);
+        promotionEligibilityLabel3.setVisible(true);
+    }
+    
+    public void displayPromotionsInLabels(ArrayList <String> cardPromotions){
+        System.out.println(cardPromotions.size());
+        System.out.println(cardPromotions.get(1));
+        System.out.println(cardPromotions.get(2));
+        if(cardPromotions.size() < 3){
+            /** Setting all  labels as invisible */
+            promotionMessageLabel1.setVisible(false);
+            promotionEligibilityLabel1.setVisible(false);
+            promotionMessageLabel2.setVisible(false);
+            promotionEligibilityLabel2.setVisible(false);
+            promotionMessageLabel3.setVisible(false);
+            promotionEligibilityLabel3.setVisible(false);
+        }
+        if(cardPromotions.size() == 3){
+            /** This means there is only one promotion */
+            promotionMessageLabel1.setText(cardPromotions.get(1));
+            promotionEligibilityLabel1.setText(cardPromotions.get(2));
+            
+            /** Next setting the other labels as invisible */
+            promotionMessageLabel2.setVisible(false);
+            promotionEligibilityLabel2.setVisible(false);
+            promotionMessageLabel3.setVisible(false);
+            promotionEligibilityLabel3.setVisible(false);
+        } 
+        if(cardPromotions.size() == 5){
+            promotionMessageLabel2.setText(cardPromotions.get(3));
+            promotionEligibilityLabel2.setText(cardPromotions.get(4));
+            
+            /** Next setting the other labels as invisible */            
+            promotionMessageLabel3.setVisible(false);
+            promotionEligibilityLabel3.setVisible(false);
+        } 
+        if(cardPromotions.size() >= 7){
+            promotionMessageLabel1.setText(cardPromotions.get(1));
+            promotionEligibilityLabel1.setText(cardPromotions.get(2));
+            promotionMessageLabel2.setText(cardPromotions.get(3));
+            promotionEligibilityLabel2.setText(cardPromotions.get(4));
+            promotionMessageLabel3.setText(cardPromotions.get(5));
+            promotionEligibilityLabel3.setText(cardPromotions.get(6));
+        } 
+    }
 }
