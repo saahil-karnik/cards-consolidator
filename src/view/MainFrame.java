@@ -4,9 +4,11 @@
  */
 package view;
 
+import java.awt.CardLayout;
+
 /**
  *
- * @author rishabhkaushick
+ * @author team4
  */
 public class MainFrame extends javax.swing.JFrame {
 
@@ -26,21 +28,118 @@ public class MainFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jSplitPane2 = new javax.swing.JSplitPane();
+        topPanel = new javax.swing.JPanel();
+        cardsButton = new javax.swing.JButton();
+        promotionsButton = new javax.swing.JButton();
+        logoutButton = new javax.swing.JButton();
+        CCTitleLabel = new javax.swing.JLabel();
+        userFirstNameLabel = new javax.swing.JLabel();
+        bottomPanel = new javax.swing.JPanel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jSplitPane2.setDividerLocation(98);
+        jSplitPane2.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
+
+        topPanel.setBackground(new java.awt.Color(0, 102, 255));
+
+        cardsButton.setFont(new java.awt.Font("Annai MN", 0, 13)); // NOI18N
+        cardsButton.setForeground(new java.awt.Color(0, 102, 255));
+        cardsButton.setText("Cards");
+
+        promotionsButton.setFont(new java.awt.Font("Annai MN", 0, 13)); // NOI18N
+        promotionsButton.setForeground(new java.awt.Color(0, 102, 255));
+        promotionsButton.setText("Promotions");
+        promotionsButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                promotionsButtonActionPerformed(evt);
+            }
+        });
+
+        logoutButton.setFont(new java.awt.Font("Annai MN", 0, 13)); // NOI18N
+        logoutButton.setForeground(new java.awt.Color(0, 102, 255));
+        logoutButton.setText("Logout");
+        logoutButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logoutButtonActionPerformed(evt);
+            }
+        });
+
+        CCTitleLabel.setFont(new java.awt.Font("Annai MN", 0, 18)); // NOI18N
+        CCTitleLabel.setForeground(new java.awt.Color(255, 255, 255));
+        CCTitleLabel.setText("CARDS CONSOLIDATOR");
+
+        userFirstNameLabel.setFont(new java.awt.Font("Annai MN", 0, 15)); // NOI18N
+        userFirstNameLabel.setForeground(new java.awt.Color(255, 255, 255));
+        userFirstNameLabel.setText("First Name");
+
+        javax.swing.GroupLayout topPanelLayout = new javax.swing.GroupLayout(topPanel);
+        topPanel.setLayout(topPanelLayout);
+        topPanelLayout.setHorizontalGroup(
+            topPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(topPanelLayout.createSequentialGroup()
+                .addGap(79, 79, 79)
+                .addGroup(topPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(topPanelLayout.createSequentialGroup()
+                        .addComponent(CCTitleLabel)
+                        .addGap(134, 134, 134)
+                        .addComponent(userFirstNameLabel))
+                    .addGroup(topPanelLayout.createSequentialGroup()
+                        .addComponent(cardsButton)
+                        .addGap(200, 200, 200)
+                        .addComponent(promotionsButton)
+                        .addGap(193, 193, 193)
+                        .addComponent(logoutButton)))
+                .addGap(80, 80, 80))
+        );
+        topPanelLayout.setVerticalGroup(
+            topPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(topPanelLayout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addGroup(topPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(CCTitleLabel)
+                    .addComponent(userFirstNameLabel))
+                .addGap(18, 18, 18)
+                .addGroup(topPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cardsButton)
+                    .addComponent(promotionsButton)
+                    .addComponent(logoutButton))
+                .addContainerGap(7, Short.MAX_VALUE))
+        );
+
+        jSplitPane2.setLeftComponent(topPanel);
+
+        bottomPanel.setBackground(new java.awt.Color(255, 255, 255));
+        bottomPanel.setPreferredSize(new java.awt.Dimension(799, 499));
+        bottomPanel.setLayout(new java.awt.CardLayout());
+        jSplitPane2.setRightComponent(bottomPanel);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(jSplitPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(jSplitPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_logoutButtonActionPerformed
+
+    private void promotionsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_promotionsButtonActionPerformed
+        PromotionsPanel newPromotionsPanel = new PromotionsPanel(bottomPanel);
+        bottomPanel.add(newPromotionsPanel);
+        CardLayout layout = (CardLayout) bottomPanel.getLayout();
+        layout.next(bottomPanel);
+        
+    }//GEN-LAST:event_promotionsButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -78,5 +177,13 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel CCTitleLabel;
+    private javax.swing.JPanel bottomPanel;
+    private javax.swing.JButton cardsButton;
+    private javax.swing.JSplitPane jSplitPane2;
+    private javax.swing.JButton logoutButton;
+    private javax.swing.JButton promotionsButton;
+    private javax.swing.JPanel topPanel;
+    private javax.swing.JLabel userFirstNameLabel;
     // End of variables declaration//GEN-END:variables
 }
