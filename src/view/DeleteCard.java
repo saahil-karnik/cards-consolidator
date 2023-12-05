@@ -17,12 +17,13 @@ import utility.DatabaseConnector;
  * @author bharatsingh
  */
 public class DeleteCard extends javax.swing.JPanel {
+    
 
     /**
      * Creates new form DeleteCard
      */
     User user;
-    Card card;
+    Card selectedCard;
     private JPanel BottonPanel;
     ArrayList<Card> usercard;
     public DeleteCard(JPanel BottomPanel) 
@@ -138,6 +139,40 @@ public class DeleteCard extends javax.swing.JPanel {
 
     private void DeleteCardButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteCardButtonActionPerformed
         // TODO add your handling code here:
+        
+            int selectedRowIndex = cardTable.getSelectedRow();
+          
+
+        // validating if the user has selected a row before hitting delete
+
+        if(selectedRowIndex == -1){
+
+            // user has not selected a row
+
+            JOptionPane.showMessageDialog(this, "Please select the card first!", "Oops, unable to delete!", HEIGHT);
+
+        } else {
+
+            try{
+
+                this.selectedCard = this.usercard.get(selectedRowIndex);
+
+                DatabaseConnector.deleteCard(selectedCard);
+
+                JOptionPane.showMessageDialog(null, "Card Deleted Successfully!", "Success!", HEIGHT);
+
+                
+
+                populateCardTable();
+
+            } catch (Exception e){
+
+                JOptionPane.showMessageDialog(this, e.getMessage(), "Unable to delete Card!", HEIGHT);
+
+            }
+
+        }
+        
        
     }//GEN-LAST:event_DeleteCardButtonActionPerformed
 
