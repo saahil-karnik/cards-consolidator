@@ -492,7 +492,10 @@ public class Card_Panel extends javax.swing.JPanel {
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
         // TODO add your handling code here:
-        
+        DeleteCard newDeletecardPanel = new DeleteCard(BottomPanel);
+        BottomPanel.add(newDeletecardPanel);
+        CardLayout layout = (CardLayout) BottomPanel.getLayout();
+        layout.next(BottomPanel);
         
     }//GEN-LAST:event_deleteButtonActionPerformed
  // ActionListener for the card image click

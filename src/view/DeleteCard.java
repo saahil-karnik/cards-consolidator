@@ -4,6 +4,14 @@
  */
 package view;
 
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
+import model.Card;
+import model.User;
+import utility.DatabaseConnector;
+
 /**
  *
  * @author bharatsingh
@@ -13,8 +21,39 @@ public class DeleteCard extends javax.swing.JPanel {
     /**
      * Creates new form DeleteCard
      */
-    public DeleteCard() {
+    User user;
+    Card card;
+    private JPanel BottonPanel;
+    ArrayList<Card> usercard;
+    public DeleteCard(JPanel BottomPanel) 
+    {
+        this.BottonPanel=BottomPanel;
         initComponents();
+        populateCardTable();
+    }
+    private void populateCardTable()
+    {try
+    {
+        this.usercard=DatabaseConnector.getUserCards(1);
+        DefaultTableModel model=(DefaultTableModel) cardTable.getModel();
+        model.setRowCount(0);
+            for(Card c1 : usercard)
+            {
+                Object [] cardrow  = new Object[5];
+                cardrow[0] = c1.getCardNo();
+                cardrow[1] = c1.getType();
+                cardrow[2] = c1.getUID();
+                cardrow[3] = c1.getPoints();
+                cardrow[4] = c1.getExpiry();
+                model.addRow(cardrow);
+            }
+    }
+    catch(Exception e)
+            {
+                JOptionPane.showMessageDialog(this, e.getMessage(), "Error!", HEIGHT);  
+            }
+    
+    
     }
 
     /**
@@ -26,19 +65,88 @@ public class DeleteCard extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
+        DeleteCardButton = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        cardTable = new javax.swing.JTable();
+
+        jLabel1.setFont(new java.awt.Font("Annai MN", 0, 18)); // NOI18N
+        jLabel1.setText("Delete Card");
+
+        DeleteCardButton.setText("Delete");
+        DeleteCardButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DeleteCardButtonActionPerformed(evt);
+            }
+        });
+
+        cardTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Card No", "Type", "UID", "Points", "Expiry"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.Object.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(cardTable);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(223, 223, 223)
+                        .addComponent(DeleteCardButton))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(80, 80, 80)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(332, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(185, 185, 185)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(344, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(74, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31)
+                .addComponent(DeleteCardButton)
+                .addGap(109, 109, 109))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(12, 12, 12)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(357, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void DeleteCardButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteCardButtonActionPerformed
+        // TODO add your handling code here:
+       
+    }//GEN-LAST:event_DeleteCardButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton DeleteCardButton;
+    private javax.swing.JTable cardTable;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }
+
