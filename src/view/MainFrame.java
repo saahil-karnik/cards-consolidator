@@ -47,6 +47,11 @@ public class MainFrame extends javax.swing.JFrame {
         cardsButton.setFont(new java.awt.Font("Annai MN", 0, 13)); // NOI18N
         cardsButton.setForeground(new java.awt.Color(0, 102, 255));
         cardsButton.setText("Cards");
+        cardsButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cardsButtonActionPerformed(evt);
+            }
+        });
 
         promotionsButton.setFont(new java.awt.Font("Annai MN", 0, 13)); // NOI18N
         promotionsButton.setForeground(new java.awt.Color(0, 102, 255));
@@ -140,6 +145,14 @@ public class MainFrame extends javax.swing.JFrame {
         layout.next(bottomPanel);
         
     }//GEN-LAST:event_promotionsButtonActionPerformed
+
+    private void cardsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cardsButtonActionPerformed
+        // TODO add your handling code here:
+        Card_Panel newcardPanel = new Card_Panel(bottomPanel);
+        bottomPanel.add(newcardPanel);
+        CardLayout layout = (CardLayout) bottomPanel.getLayout();
+        layout.next(bottomPanel);
+    }//GEN-LAST:event_cardsButtonActionPerformed
 
     /**
      * @param args the command line arguments
