@@ -10,19 +10,18 @@ import javax.swing.ImageIcon;
  *
  * @author saahilk
  */
-public class Promotions {
+public class Promotion {
  
-       int promotionID;      
+       String promotionID;      
        String type;
        String promotionName;
-       int eligibilityPoints;
-      
-       
-    public int getPromotionID() {
+       int eligiblePoints;
+
+    public String getPromotionID() {
         return promotionID;
     }
 
-    public void setPromotionID(String firstname) {
+    public void setPromotionID(String promotionID) {
         this.promotionID = promotionID;
     }
 
@@ -33,18 +32,23 @@ public class Promotions {
     public void setType(String type) {
         this.type = type;
     }
-    public String getPromotionType() {
+
+    public String getPromotionName() {
         return promotionName;
     }
 
-    public void setPromotionType(String id) {
+    public void setPromotionName(String promotionName) {
         this.promotionName = promotionName;
     }
-    public int getEligibilityPoints() {
-        return eligibilityPoints;
+
+    public int getEligiblePoints() {
+        return eligiblePoints;
     }
 
-    public void setEligibilityPoints(int id) {
-        this.eligibilityPoints = eligibilityPoints;
+    public void setEligiblePoints(int eligiblePoints) {
+        this.eligiblePoints = eligiblePoints;
     }
+      
+       
+    
 }

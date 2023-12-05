@@ -35,9 +35,12 @@ EligiblePoints INT(25),
 PromotionName VARCHAR(20)
 );
 
-INSERT INTO PROMOTIONS (PromotionID, Type, EligiblePoints, PromotionName) VALUES ('','','','','');
-INSERT INTO PROMOTIONS (PromotionID, Type, EligiblePoints, PromotionName) VALUES ('','','','','');
-INSERT INTO PROMOTIONS (PromotionID, Type, EligiblePoints, PromotionName) VALUES ('','','','','');
+INSERT INTO PROMOTIONS (PromotionID, Type, EligiblePoints, PromotionName) VALUES ('TH1','Tim Hortons','5000','Get 5% off on your Latte now!!');
+INSERT INTO PROMOTIONS (PromotionID, Type, EligiblePoints, PromotionName) VALUES ('TH2','Tim Hortons','8000','Get 8% off on your Latte now!!');
+INSERT INTO PROMOTIONS (PromotionID, Type, EligiblePoints, PromotionName) VALUES ('SB1','Starbucks','500','25% off on Dark Roast');
+INSERT INTO PROMOTIONS (PromotionID, Type, EligiblePoints, PromotionName) VALUES ('SB2','Starbucks','1000','50% off on Croissant');
+INSERT INTO PROMOTIONS (PromotionID, Type, EligiblePoints, PromotionName) VALUES ('SB3','Starbucks','2000','Free Chai');
+INSERT INTO PROMOTIONS (PromotionID, Type, EligiblePoints, PromotionName) VALUES ('PC1','PC Optimum','10000','Redeem 2000 points and get 1000 points back');
 
 ALTER TABLE PROMOTIONS
 ADD CONSTRAINT PK_promotions PRIMARY KEY (PromotionID);

@@ -2,15 +2,17 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package ui;
+package view;
 
+import model.*;
+import utility.*;
 import java.awt.CardLayout;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import model.user;
+//import model.user;
 
 /**
  *
@@ -26,7 +28,8 @@ public class New_card extends javax.swing.JPanel {
     
     
     private JPanel BottomPanel;
-    private user newUser;
+    private User loggedInUser;
+//    private user newUser;
     public New_card(){
         
        
@@ -58,9 +61,11 @@ public class New_card extends javax.swing.JPanel {
         jButton1 = new javax.swing.JButton();
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
 
-        setBackground(new java.awt.Color(0, 102, 255));
+        setBackground(new java.awt.Color(255, 255, 255));
         setToolTipText("");
 
+        gobackbutton.setFont(new java.awt.Font("Annai MN", 0, 12)); // NOI18N
+        gobackbutton.setForeground(new java.awt.Color(0, 102, 255));
         gobackbutton.setText("Go back");
         gobackbutton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -68,34 +73,36 @@ public class New_card extends javax.swing.JPanel {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Annai MN", 0, 18)); // NOI18N
         jLabel1.setText("Create A New Card:");
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Annai MN", 0, 12)); // NOI18N
         jLabel2.setText("Card_Name:");
 
-        Card_Name_combobox.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        Card_Name_combobox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "StarBucks", "PC optimum", "TimHortons", "Scene+" }));
+        Card_Name_combobox.setFont(new java.awt.Font("Annai MN", 0, 12)); // NOI18N
+        Card_Name_combobox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "StarBucks", "PC Optimum", "Tim Hortons", "Scene+" }));
         Card_Name_combobox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Card_Name_comboboxActionPerformed(evt);
             }
         });
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Annai MN", 0, 12)); // NOI18N
         jLabel3.setText("Expiry Date:");
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Annai MN", 0, 12)); // NOI18N
         jLabel4.setText("Card_No:");
 
-        cardNo_text_field.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        cardNo_text_field.setFont(new java.awt.Font("Annai MN", 0, 12)); // NOI18N
         cardNo_text_field.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cardNo_text_fieldActionPerformed(evt);
             }
         });
 
-        jButton1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jButton1.setBackground(new java.awt.Color(0, 102, 255));
+        jButton1.setFont(new java.awt.Font("Annai MN", 0, 12)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Submit");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -113,25 +120,23 @@ public class New_card extends javax.swing.JPanel {
                         .addGap(19, 19, 19)
                         .addComponent(gobackbutton))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(274, 274, 274)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(95, 95, 95)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(18, 18, 18)
-                                .addComponent(Card_Name_combobox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(cardNo_text_field, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                    .addGap(224, 224, 224)))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(274, 274, 274)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(cardNo_text_field, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(Card_Name_combobox, javax.swing.GroupLayout.Alignment.LEADING, 0, 200, Short.MAX_VALUE))
+                            .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(296, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -140,22 +145,21 @@ public class New_card extends javax.swing.JPanel {
                 .addGap(27, 27, 27)
                 .addComponent(gobackbutton)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(47, 47, 47)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(Card_Name_combobox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(31, 31, 31)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cardNo_text_field, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(9, 9, 9)
-                        .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 132, Short.MAX_VALUE)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(47, 47, 47)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(Card_Name_combobox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(31, 31, 31)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cardNo_text_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 133, Short.MAX_VALUE)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(77, 77, 77))
         );
@@ -184,39 +188,54 @@ public class New_card extends javax.swing.JPanel {
                          SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
                          String dateString = dateFormat.format(selectedDate);
 
-          user newUser = new user();
+        
+                         
+//          user newUser = new user();
           String userInput = Card_Name_combobox.getSelectedItem().toString();
-          if ("StarBucks".equals(userInput)){
-        newUser.setCard_Name_StarBucks(Card_Name_combobox.getSelectedItem().toString());
-        newUser.setCard_NO_starbucks(cardNo_text_field.getText());
-        newUser.setExpiry_Date_StarBucks(dateString);
-        Card_Panel newCard_Panel = new Card_Panel(newUser);
-        JOptionPane.showMessageDialog(this, "You New Card has been added", "Succesful", JOptionPane.PLAIN_MESSAGE);
-        BottomPanel.add(newCard_Panel);
-        CardLayout layout = (CardLayout) BottomPanel.getLayout();
-        layout.next(BottomPanel);
-          }
-          else if("TimHortons".equals(userInput)){
-        newUser.setCard_Name_tim(Card_Name_combobox.getSelectedItem().toString());
-        newUser.setCard_NO_tim(cardNo_text_field.getText());
-        newUser.setExpiry_Date_tim(dateString);
-        Card_Panel newCard_Panel1 = new Card_Panel(newUser);
-        JOptionPane.showMessageDialog(this, "You New Card has been added", "Succesful", JOptionPane.PLAIN_MESSAGE);
-        BottomPanel.add(newCard_Panel1);
-        CardLayout layout = (CardLayout) BottomPanel.getLayout();
-        layout.next(BottomPanel);
-          }
-          else if("PC optimum".equals(userInput)){
-                newUser.setCard_Name_Pcoptimum(Card_Name_combobox.getSelectedItem().toString());
-        newUser.setCard_NO_Pcoptimum(cardNo_text_field.getText());
-        newUser.setExpiry_Date_pcoptimum(dateString);
-        Card_Panel newCard_Panel1 = new Card_Panel(newUser);
-        JOptionPane.showMessageDialog(this, "You New Card has been added", "Succesful", JOptionPane.PLAIN_MESSAGE);
-        BottomPanel.add(newCard_Panel1);
-        CardLayout layout = (CardLayout) BottomPanel.getLayout();
-        layout.next(BottomPanel);
-          }
           
+          String cardType = Card_Name_combobox.getSelectedItem().toString();
+          int cardNo = Integer.parseInt(cardNo_text_field.getText());
+          Date expiryDate = selectedDate;
+          Card userCard = new Card();
+          userCard.setCardNo(cardNo);
+          userCard.setType(cardType);
+          userCard.setPoints(200);
+          userCard.setExpiry(expiryDate);
+          userCard.setUID(1);
+          
+          DatabaseConnector.addCard(userCard);
+          
+//          if ("StarBucks".equals(userInput)){
+//        newUser.setCard_Name_StarBucks(Card_Name_combobox.getSelectedItem().toString());
+//        newUser.setCard_NO_starbucks(cardNo_text_field.getText());
+//        newUser.setExpiry_Date_StarBucks(dateString);
+//        Card_Panel newCard_Panel = new Card_Panel(newUser);
+//        JOptionPane.showMessageDialog(this, "You New Card has been added", "Succesful", JOptionPane.PLAIN_MESSAGE);
+//        BottomPanel.add(newCard_Panel);
+//        CardLayout layout = (CardLayout) BottomPanel.getLayout();
+//        layout.next(BottomPanel);
+//          }
+//          else if("TimHortons".equals(userInput)){
+//        newUser.setCard_Name_tim(Card_Name_combobox.getSelectedItem().toString());
+//        newUser.setCard_NO_tim(cardNo_text_field.getText());
+//        newUser.setExpiry_Date_tim(dateString);
+//        Card_Panel newCard_Panel1 = new Card_Panel(newUser);
+//        JOptionPane.showMessageDialog(this, "You New Card has been added", "Succesful", JOptionPane.PLAIN_MESSAGE);
+//        BottomPanel.add(newCard_Panel1);
+//        CardLayout layout = (CardLayout) BottomPanel.getLayout();
+//        layout.next(BottomPanel);
+//          }
+//          else if("PC optimum".equals(userInput)){
+//                newUser.setCard_Name_Pcoptimum(Card_Name_combobox.getSelectedItem().toString());
+//        newUser.setCard_NO_Pcoptimum(cardNo_text_field.getText());
+//        newUser.setExpiry_Date_pcoptimum(dateString);
+//        
+//          }
+        Card_Panel newCard_Panel1 = new Card_Panel(BottomPanel);
+        JOptionPane.showMessageDialog(this, "You New Card has been added", "Succesful", JOptionPane.PLAIN_MESSAGE);
+        BottomPanel.add(newCard_Panel1);
+        CardLayout layout = (CardLayout) BottomPanel.getLayout();
+        layout.next(BottomPanel);  
     }
                      
          else{

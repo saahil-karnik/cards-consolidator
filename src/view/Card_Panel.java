@@ -2,21 +2,32 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package ui;
+package view;
 
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import static java.lang.Math.random;
 import static java.lang.StrictMath.random;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import java.util.Random;
-import model.user;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import model.User;
+import model.Card;
+import utility.DatabaseConnector;
 
 /**
  *
@@ -27,17 +38,20 @@ public class Card_Panel extends javax.swing.JPanel {
     /**
      * Creates new form Card_Panel
      */
-    private user newUser;
+    private Card newCard;
+    private User loggedInUser;
+    private User newUser;
     private JPanel BottomPanel;
     
-    public Card_Panel(user newUser){
-        
-       this.newUser = newUser;
-        initComponents();
-}
+//    public Card_Panel(user newUser){
+//        
+//       this.newUser = newUser;
+//        initComponents();
+//}
     public Card_Panel(JPanel BottomPanel) {
         this.BottomPanel= BottomPanel;
         initComponents();
+        populateUserCards();
        
     }
 
@@ -79,20 +93,27 @@ public class Card_Panel extends javax.swing.JPanel {
         jLabel15 = new javax.swing.JLabel();
         expiry3 = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
+        deleteButton = new javax.swing.JButton();
 
-        setBackground(new java.awt.Color(0, 102, 255));
+        setBackground(new java.awt.Color(255, 255, 255));
         setForeground(new java.awt.Color(204, 204, 204));
+        setMaximumSize(new java.awt.Dimension(800, 500));
+        setPreferredSize(new java.awt.Dimension(800, 500));
 
+        jLabel3.setFont(new java.awt.Font("Annai MN", 0, 13)); // NOI18N
         jLabel3.setText("Available Points:");
 
+        Card_textFeild.setFont(new java.awt.Font("Annai MN", 0, 13)); // NOI18N
         Card_textFeild.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Card_textFeildActionPerformed(evt);
             }
         });
 
-        jLabel4.setText("Card_Name:");
+        jLabel4.setFont(new java.awt.Font("Annai MN", 0, 13)); // NOI18N
+        jLabel4.setText("Card Name:");
 
+        jButton1.setFont(new java.awt.Font("Annai MN", 0, 13)); // NOI18N
         jButton1.setText("Add New Card");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -100,209 +121,212 @@ public class Card_Panel extends javax.swing.JPanel {
             }
         });
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ui/Tim_horton_logo.png"))); // NOI18N
+        points_text1.setFont(new java.awt.Font("Annai MN", 0, 13)); // NOI18N
+
+        jLabel2.setBackground(new java.awt.Color(0, 102, 255));
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/Tim_horton_logo.png"))); // NOI18N
         jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel2MouseClicked(evt);
             }
         });
 
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ui/Starbucks_Corporation_Logo_2011.svg.png"))); // NOI18N
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/Starbucks_Corporation_Logo_2011.svg.png"))); // NOI18N
         jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel5MouseClicked(evt);
             }
         });
 
+        jLabel6.setFont(new java.awt.Font("Annai MN", 0, 13)); // NOI18N
         jLabel6.setText("Available Points:");
 
+        Card_textFeild1.setFont(new java.awt.Font("Annai MN", 0, 13)); // NOI18N
         Card_textFeild1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Card_textFeild1ActionPerformed(evt);
             }
         });
 
-        jLabel7.setText("Card_Name:");
+        jLabel7.setFont(new java.awt.Font("Annai MN", 0, 13)); // NOI18N
+        jLabel7.setText("Card Name:");
 
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ui/Pc Optimum.jpg"))); // NOI18N
+        point_text2.setFont(new java.awt.Font("Annai MN", 0, 13)); // NOI18N
+        point_text2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                point_text2ActionPerformed(evt);
+            }
+        });
+
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/Pc Optimum.jpg"))); // NOI18N
         jLabel8.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel8MouseClicked(evt);
             }
         });
 
+        Card_textFeild4.setFont(new java.awt.Font("Annai MN", 0, 13)); // NOI18N
         Card_textFeild4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Card_textFeild4ActionPerformed(evt);
             }
         });
 
-        jLabel9.setText("Card_Name:");
+        jLabel9.setFont(new java.awt.Font("Annai MN", 0, 13)); // NOI18N
+        jLabel9.setText("Card Name:");
 
+        point_text3.setFont(new java.awt.Font("Annai MN", 0, 13)); // NOI18N
+
+        jLabel10.setFont(new java.awt.Font("Annai MN", 0, 13)); // NOI18N
         jLabel10.setText("Available Points:");
 
+        Card_NoFeild1.setFont(new java.awt.Font("Annai MN", 0, 13)); // NOI18N
         Card_NoFeild1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Card_NoFeild1ActionPerformed(evt);
             }
         });
 
-        jLabel11.setText("Card_No:");
+        jLabel11.setFont(new java.awt.Font("Annai MN", 0, 13)); // NOI18N
+        jLabel11.setText("Card No:");
 
+        jLabel12.setFont(new java.awt.Font("Annai MN", 0, 13)); // NOI18N
         jLabel12.setText("Expiry Date:");
 
+        expiry1.setFont(new java.awt.Font("Annai MN", 0, 13)); // NOI18N
         expiry1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 expiry1ActionPerformed(evt);
             }
         });
 
+        Card_NoFeild2.setFont(new java.awt.Font("Annai MN", 0, 13)); // NOI18N
         Card_NoFeild2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Card_NoFeild2ActionPerformed(evt);
             }
         });
 
-        jLabel13.setText("Card_No:");
+        jLabel13.setFont(new java.awt.Font("Annai MN", 0, 13)); // NOI18N
+        jLabel13.setText("Card No:");
 
+        expiry2.setFont(new java.awt.Font("Annai MN", 0, 13)); // NOI18N
         expiry2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 expiry2ActionPerformed(evt);
             }
         });
 
-        jLabel14.setText("Expiry_Date");
+        jLabel14.setFont(new java.awt.Font("Annai MN", 0, 13)); // NOI18N
+        jLabel14.setText("Expiry Date:");
 
+        Card_NoFeild3.setFont(new java.awt.Font("Annai MN", 0, 13)); // NOI18N
         Card_NoFeild3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Card_NoFeild3ActionPerformed(evt);
             }
         });
 
-        jLabel15.setText("Card_No");
+        jLabel15.setFont(new java.awt.Font("Annai MN", 0, 13)); // NOI18N
+        jLabel15.setText("Expiry Date:");
 
-        jLabel16.setText("Expiry_Date");
+        expiry3.setFont(new java.awt.Font("Annai MN", 0, 13)); // NOI18N
+
+        jLabel16.setFont(new java.awt.Font("Annai MN", 0, 13)); // NOI18N
+        jLabel16.setText("Card No:");
+
+        deleteButton.setFont(new java.awt.Font("Annai MN", 0, 13)); // NOI18N
+        deleteButton.setText("Delete Card");
+        deleteButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(67, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addGap(1189, 1189, 1189))
+                .addGap(304, 304, 304)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(deleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(309, 309, 309))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(40, 40, 40)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel11)
+                            .addComponent(jLabel12))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(points_text1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(expiry1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Card_NoFeild1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Card_textFeild, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(80, 80, 80)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(points_text1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(14, 14, 14)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel11)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(Card_NoFeild1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel4)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(Card_textFeild, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(16, 16, 16)
-                                .addComponent(jLabel12)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(expiry1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(44, 44, 44)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(14, 14, 14)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel13)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(Card_NoFeild2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel7)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(Card_textFeild1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel14)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(expiry2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                     .addComponent(jLabel6)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(point_text2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel16)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(expiry3, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel10)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(point_text3, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(14, 14, 14)
+                                    .addComponent(jLabel14))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel15)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(Card_NoFeild3, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(expiry2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel9)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(Card_textFeild4, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                        .addGap(2, 2, 2)
+                                        .addComponent(point_text2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(26, 26, 26)
+                                        .addComponent(jLabel7))
+                                    .addComponent(jLabel13, javax.swing.GroupLayout.Alignment.TRAILING))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(Card_NoFeild2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(Card_textFeild1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(20, 20, 20)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel10)
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel16)
+                            .addComponent(jLabel15))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Card_NoFeild3, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Card_textFeild4, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(point_text3, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(expiry3, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(463, 463, 463)
-                        .addComponent(jButton1)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel5)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(63, 63, 63)
-                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel2)
+                        .addGap(52, 52, 52)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addContainerGap()
+                        .addComponent(jLabel2)))
+                .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel7)
-                            .addComponent(Card_textFeild1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(8, 8, 8)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel13)
-                            .addComponent(Card_NoFeild2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel6)
-                            .addComponent(point_text2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel10)
-                                .addComponent(point_text3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel14)
-                            .addComponent(expiry2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
@@ -313,34 +337,66 @@ public class Card_Panel extends javax.swing.JPanel {
                             .addComponent(Card_NoFeild1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(8, 8, 8)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(points_text1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(points_text1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel12)
-                            .addComponent(expiry1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(expiry1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel12)))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel9)
-                            .addComponent(Card_textFeild4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(8, 8, 8)
+                            .addComponent(jLabel7)
+                            .addComponent(Card_textFeild1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(39, 39, 39)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel6)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabel10)
+                                        .addComponent(point_text2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel16)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel15)
-                            .addComponent(Card_NoFeild3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(36, 36, 36)
+                            .addComponent(jLabel14)
+                            .addComponent(expiry2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(35, 35, 35)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel16)
-                            .addComponent(expiry3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(56, 56, 56)
-                .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1))
+                            .addComponent(Card_NoFeild2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel13)))
+                    .addComponent(jLabel9)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addComponent(Card_textFeild4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Card_NoFeild3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(point_text3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(expiry3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel15))))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(92, 92, 92)
+                        .addComponent(jLabel1)
+                        .addGap(69, 69, 69))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton1)
+                        .addGap(12, 12, 12)
+                        .addComponent(deleteButton)
+                        .addGap(31, 31, 31))))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        New_card newcard = new New_card();
+        // commented by R
+        New_card newcard = new New_card(BottomPanel);
         BottomPanel.add(newcard);
         CardLayout layout = (CardLayout) BottomPanel.getLayout();
         layout.next(BottomPanel);
@@ -351,10 +407,19 @@ public class Card_Panel extends javax.swing.JPanel {
       
         Random random = new Random();
         int randomValue = random.nextInt(1000);
-        point_text2.setText(String.valueOf(randomValue));
-        Card_textFeild1.setText("StarBucks");
-         Card_NoFeild2.setText(newUser.getCard_NO_starbucks());
-         expiry2.setText(newUser.getExpiry_Date_StarBucks());
+        Card_textFeild4.setText("Starbucks");
+//        Card_NoFeild2.setText(newCard.);
+//        expiry2.setText(newUser.getExpiry_Date_StarBucks())
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
+        Card starbucksCard = DatabaseConnector.getCard("StarBucks", 1);
+//        for debugging:
+//        System.out.println(starbucksCard.getCardNo());
+        Card_NoFeild3.setText(Integer.toString(starbucksCard.getCardNo()));
+        point_text3.setText(Integer.toString(starbucksCard.getPoints()));
+        expiry3.setText( dateFormat.format(starbucksCard.getExpiry()));
+        
+        
+        
         
     }//GEN-LAST:event_jLabel5MouseClicked
 
@@ -370,10 +435,20 @@ public class Card_Panel extends javax.swing.JPanel {
         // TODO add your handling code here:
         Random random = new Random();
         int randomValue = random.nextInt(1000);
-        point_text3.setText(String.valueOf(randomValue));
-        Card_textFeild4.setText("PC optimum");
-         Card_NoFeild2.setText(newUser.getCard_NO_Pcoptimum());
-         expiry2.setText(newUser.getExpiry_Date_tim());
+//        point_text2.setText(String.valueOf(randomValue));
+//        Card_textFeild1.setText("PC Optimum");
+//         Card_NoFeild2.setText(newUser.getCard_NO_Pcoptimum());
+//         expiry2.setText(newUser.getExpiry_Date_tim());
+
+        Card pcOptimumCard = DatabaseConnector.getCard("PC Optimum", 1);
+        if(pcOptimumCard.getType() == null){
+            JOptionPane.showMessageDialog(this, "Please first add a PC Optimum Card", "No PC Optimum Card Entered!", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
+            Card_textFeild1.setText(pcOptimumCard.getType());
+            Card_NoFeild2.setText(Integer.toString(pcOptimumCard.getCardNo()));
+            point_text2.setText(Integer.toString(pcOptimumCard.getPoints()));
+        }
     }//GEN-LAST:event_jLabel8MouseClicked
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
@@ -382,8 +457,9 @@ public class Card_Panel extends javax.swing.JPanel {
         int randomValue = random.nextInt(1000);
         points_text1.setText(String.valueOf(randomValue));
          Card_textFeild.setText("Tim Horton");
-         Card_NoFeild1.setText(newUser.getCard_NO_tim());
-         expiry1.setText(newUser.getExpiry_Date_tim());
+         DatabaseConnector.getCard("Tim Horton", 1);
+//         Card_NoFeild1.setText(newUser.getCard_NO_tim());
+//         expiry1.setText(newUser.getExpiry_Date_tim());
     }//GEN-LAST:event_jLabel2MouseClicked
 
     private void Card_textFeildActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Card_textFeildActionPerformed
@@ -409,29 +485,42 @@ public class Card_Panel extends javax.swing.JPanel {
     private void expiry1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_expiry1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_expiry1ActionPerformed
+
+    private void point_text2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_point_text2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_point_text2ActionPerformed
+
+    private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
+        // TODO add your handling code here:
+        DeleteCard newDeletecardPanel = new DeleteCard(BottomPanel);
+        BottomPanel.add(newDeletecardPanel);
+        CardLayout layout = (CardLayout) BottomPanel.getLayout();
+        layout.next(BottomPanel);
+        
+    }//GEN-LAST:event_deleteButtonActionPerformed
  // ActionListener for the card image click
     
-public void addCard(user user) {
-        // Create a JLabel for the card
-        JLabel cardLabel = new JLabel("NewCard");
-
-        // Add an ActionListener to the label to handle click events
-        cardLabel.addMouseListener(new java.awt.event.MouseAdapter() {
-            @Override
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                // Handle the click event, maybe open a details panel or dialog
-                Card_textFeild.setText("TimHorton");
-            }
-        });
-
-        // Add the label to the panel
-        Card_Panel newCard_Panel = new Card_Panel(BottomPanel);
-         newCard_Panel.add(cardLabel);
-       
-        // Repaint the panel to reflect the changes
-        revalidate();
-        repaint();
-    }
+//public void addCard(user user) {
+//        // Create a JLabel for the card
+//        JLabel cardLabel = new JLabel("NewCard");
+//
+//        // Add an ActionListener to the label to handle click events
+//        cardLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+//            @Override
+//            public void mouseClicked(java.awt.event.MouseEvent evt) {
+//                // Handle the click event, maybe open a details panel or dialog
+//                Card_textFeild.setText("TimHorton");
+//            }
+//        });
+//
+//        // Add the label to the panel
+//        Card_Panel newCard_Panel = new Card_Panel(BottomPanel);
+//         newCard_Panel.add(cardLabel);
+//       
+//        // Repaint the panel to reflect the changes
+//        revalidate();
+//        repaint();
+//    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField Card_NoFeild1;
     private javax.swing.JTextField Card_NoFeild2;
@@ -439,6 +528,7 @@ public void addCard(user user) {
     private javax.swing.JTextField Card_textFeild;
     private javax.swing.JTextField Card_textFeild1;
     private javax.swing.JTextField Card_textFeild4;
+    private javax.swing.JButton deleteButton;
     private javax.swing.JTextField expiry1;
     private javax.swing.JTextField expiry2;
     private javax.swing.JTextField expiry3;
@@ -463,4 +553,27 @@ public void addCard(user user) {
     private javax.swing.JTextField point_text3;
     private javax.swing.JTextField points_text1;
     // End of variables declaration//GEN-END:variables
+
+    public void populateUserCards(){
+        //getting the list of cards from the database
+        ArrayList <Card> userCards = DatabaseConnector.getUserCards(1);
+        // setting the image icon size
+        BufferedImage firstCardImage = null;
+        BufferedImage secondCardImage = null;
+        BufferedImage thirdCardImage = null;
+        
+        try{
+            if(userCards.get(0).getType().equals("Tim Hortons")){
+                firstCardImage = ImageIO.read(new File("Tim_horton_logo.png"));
+                Image dimg = firstCardImage.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+                ImageIcon firstImageIcon = new ImageIcon(dimg);
+                jLabel2.setIcon(firstImageIcon);
+            } else if(userCards.get(0).getType().equals("StarBucks")){
+//                firstCardImage = ImageIO.read(new File("Tim_horton_logo.png"));
+            }
+        } catch(IOException e){
+            
+        }
+    }
+
 }
