@@ -5,7 +5,9 @@
 package view;
 import java.util.ArrayList;
 import javax.swing.JPanel;
+import model.Card;
 import model.Promotion;
+import model.User;
 import utility.DatabaseConnector;
 
 /**
@@ -110,7 +112,7 @@ public class PromotionsPanel extends javax.swing.JPanel {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(67, 67, 67)
+                .addGap(79, 79, 79)
                 .addComponent(allCardsButton)
                 .addGap(80, 80, 80)
                 .addComponent(timHortonsButton)
@@ -118,7 +120,7 @@ public class PromotionsPanel extends javax.swing.JPanel {
                 .addComponent(starbucksPromoButton)
                 .addGap(80, 80, 80)
                 .addComponent(pcOptimumPromoButton)
-                .addContainerGap(93, Short.MAX_VALUE))
+                .addContainerGap(81, Short.MAX_VALUE))
         );
 
         jSplitPane1.setLeftComponent(jPanel1);
@@ -201,6 +203,7 @@ public class PromotionsPanel extends javax.swing.JPanel {
 
     private void starbucksPromoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_starbucksPromoButtonActionPerformed
         // TODO add your handling code here:
+        promotionsTitleLabel.setText("Starbucks Promotions!");
         /** Currently Starbucks is hard-coded but this value will be dynamic. */
         ArrayList <Promotion> cardPromotions = DatabaseConnector.getSelectPromotions("Starbucks");
         
@@ -214,7 +217,7 @@ public class PromotionsPanel extends javax.swing.JPanel {
     private void timHortonsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_timHortonsButtonActionPerformed
         /** Currently Tim Horton's is hard-coded but this value will be dynamic. */
 //        ArrayList <String> cardPromotions = getCardPromotions("Tim Hortons");
-//        promotionsTitleLabel.setText(cardPromotions.get(0));
+        promotionsTitleLabel.setText("Tim Hortons Promotions!");
         
         // change this to the other function later
         ArrayList <Promotion> cardPromotions = DatabaseConnector.getSelectPromotions("Tim Hortons");
@@ -230,6 +233,16 @@ public class PromotionsPanel extends javax.swing.JPanel {
 
     private void pcOptimumPromoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pcOptimumPromoButtonActionPerformed
         // TODO add your handling code here:
+        
+        promotionsTitleLabel.setText("PC Optimum Promotions!");
+        // change this to the other function later
+        ArrayList <Promotion> cardPromotions = DatabaseConnector.getSelectPromotions("PC Optimum");
+        
+        /** Setting the all promotion labels as visible*/
+        setAllPromotionLabelsHidden();
+        
+        /** Displaying the promotions into the labels */
+        displayPromotionsInLabels(cardPromotions);
     }//GEN-LAST:event_pcOptimumPromoButtonActionPerformed
 
     /**
@@ -399,4 +412,10 @@ public class PromotionsPanel extends javax.swing.JPanel {
 //            promotionEligibilityLabel3.setText(cardPromotions.get(6));
 //        } 
 //    }
+    
+    public void getUserAndCardDetails(){
+        User loggedInUser = new User();
+        loggedInUser = DatabaseConnector.getAllusers().get(0);
+        ArrayList <Card> userCards = DatabaseConnector.getUserCards(loggedInUser.getId());
+    }
 }
