@@ -217,7 +217,7 @@ public class DatabaseConnector {
      * 
      */
     public static void deleteUser(User u) {
-        String query = "delete from USER where id = ?";
+        String query = "delete from USER where UID = ?";
 
         try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
             PreparedStatement stmt = conn.prepareStatement(query);
@@ -229,7 +229,7 @@ public class DatabaseConnector {
     }
     
     public static void deleteCard(Card c){
-        String query = "delete from CARD where id = ?";
+        String query = "delete from CARD where CardNo = ?";
 
         try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
             PreparedStatement stmt = conn.prepareStatement(query);
@@ -241,7 +241,7 @@ public class DatabaseConnector {
     }
     
     public static void deletePromotion(Promotions p) {
-        String query = "delete from PROMOTION where id = ?";
+        String query = "delete from PROMOTION where PromotionID = ?";
 
         try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
             PreparedStatement stmt = conn.prepareStatement(query);
