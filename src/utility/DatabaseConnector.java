@@ -190,7 +190,7 @@ public class DatabaseConnector {
 //        return list of users from db
         ArrayList<Promotions> promotion = new ArrayList<>();
 
-        String query = "SELECT * FROM USER";
+        String query = "SELECT * FROM PROMOTIONS";
         try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(query);
