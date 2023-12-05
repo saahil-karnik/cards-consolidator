@@ -210,6 +210,30 @@ public class DatabaseConnector {
         return promotion;
     }
 
+ public static ArrayList<Promotions> getSelectPromotions(String promotionName) {
+//        return list of specific promotions from db
+        ArrayList<Promotions> selectPromotion = new ArrayList<>();
+
+        String query = "SELECT * FROM PROMOTIONS WHERE PromotionName = ?";
+        try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                Promotions p = new Promotions();
+                p.setPromotionID(rs.getString("name"));
+                p.setType(rs.getString("Type"));
+                p.setPromotionType(rs.getString("id"));
+                p.setEligibilityPoints(rs.getInt("EligibilityPoints"));
+                selectPromotion.add(p);
+            }
+            rs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return selectPromotion;
+    }
+
     /**
      * Delete given user from database
      * @see User
