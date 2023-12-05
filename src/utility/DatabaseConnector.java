@@ -163,28 +163,28 @@ public class DatabaseConnector {
         return c;
     }
     
-//    public static ArrayList<Card> getCards(User user){
-//        ArrayList<Card> card = new ArrayList<>();
-//        String query = "SELECT * FROM CARD WHERE UID=?";
-//        try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
-//            Statement stmt = conn.createStatement();
-//            ResultSet rs = stmt.executeQuery(query);
-//            while (rs.next()) {
-//                Card c = new Card();
-//                c.setUID(rs.getInt("UID"));
-//                c.setType(rs.getString("Type"));
-//                c.setExpiry(rs.getDate("Expiry"));
-//                c.setPoints(rs.getInt("Points"));
-//                c.setCardNo(rs.getInt("CardNo"));
-//                card.add(c);
-//            }
-//            rs.close();
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//
-//        return card;
-//    }
+    public static ArrayList<Card> getUserCards(int userID){
+        ArrayList<Card> card = new ArrayList<>();
+        String query = "SELECT * FROM CARD WHERE UID=?";
+        try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
+            PreparedStatement stmt = conn.prepareStatement(query);
+            stmt.setInt(1, userID);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                Card c = new Card();
+                c.setUID(rs.getInt("UID"));
+                c.setType(rs.getString("Type"));
+                c.setExpiry(rs.getDate("Expiry"));
+                c.setPoints(rs.getInt("Points"));
+                c.setCardNo(rs.getInt("CardNo"));
+                card.add(c);
+            }
+            rs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return card;
+    }
     
     public static ArrayList<Promotions> getAllPromotions() {
 //        return list of users from db
