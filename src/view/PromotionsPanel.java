@@ -5,6 +5,8 @@
 package view;
 import java.util.ArrayList;
 import javax.swing.JPanel;
+import model.Promotion;
+import utility.DatabaseConnector;
 
 /**
  * 
@@ -34,17 +36,10 @@ public class PromotionsPanel extends javax.swing.JPanel {
         jComboBox1 = new javax.swing.JComboBox<>();
         jSplitPane1 = new javax.swing.JSplitPane();
         jPanel1 = new javax.swing.JPanel();
-        cardPromoButton1 = new javax.swing.JButton();
-        cardPromoButton2 = new javax.swing.JButton();
-        cardPromoButton3 = new javax.swing.JButton();
-        cardPromoButton4 = new javax.swing.JButton();
-        cardPromoButton5 = new javax.swing.JButton();
-        cardPromoButton6 = new javax.swing.JButton();
-        cardPromoButton7 = new javax.swing.JButton();
-        cardPromoButton8 = new javax.swing.JButton();
-        cardPromoButton9 = new javax.swing.JButton();
+        timHortonsButton = new javax.swing.JButton();
+        starbucksPromoButton = new javax.swing.JButton();
+        pcOptimumPromoButton = new javax.swing.JButton();
         allCardsButton = new javax.swing.JButton();
-        cardPromoButton10 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         promotionsTitleLabel = new javax.swing.JLabel();
         promotionMessageLabel1 = new javax.swing.JLabel();
@@ -58,83 +53,33 @@ public class PromotionsPanel extends javax.swing.JPanel {
 
         jSplitPane1.setDividerLocation(200);
 
-        cardPromoButton1.setBackground(new java.awt.Color(0, 102, 255));
-        cardPromoButton1.setFont(new java.awt.Font("Annai MN", 0, 12)); // NOI18N
-        cardPromoButton1.setForeground(new java.awt.Color(255, 255, 255));
-        cardPromoButton1.setText("KrisFlyer");
-        cardPromoButton1.addActionListener(new java.awt.event.ActionListener() {
+        timHortonsButton.setBackground(new java.awt.Color(0, 102, 255));
+        timHortonsButton.setFont(new java.awt.Font("Annai MN", 0, 12)); // NOI18N
+        timHortonsButton.setForeground(new java.awt.Color(255, 255, 255));
+        timHortonsButton.setText("Tim Hortons");
+        timHortonsButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cardPromoButton1ActionPerformed(evt);
+                timHortonsButtonActionPerformed(evt);
             }
         });
 
-        cardPromoButton2.setBackground(new java.awt.Color(0, 102, 255));
-        cardPromoButton2.setFont(new java.awt.Font("Annai MN", 0, 12)); // NOI18N
-        cardPromoButton2.setForeground(new java.awt.Color(255, 255, 255));
-        cardPromoButton2.setText("Tim Hortons");
-        cardPromoButton2.addActionListener(new java.awt.event.ActionListener() {
+        starbucksPromoButton.setBackground(new java.awt.Color(0, 102, 255));
+        starbucksPromoButton.setFont(new java.awt.Font("Annai MN", 0, 12)); // NOI18N
+        starbucksPromoButton.setForeground(new java.awt.Color(255, 255, 255));
+        starbucksPromoButton.setText("Starbucks");
+        starbucksPromoButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cardPromoButton2ActionPerformed(evt);
+                starbucksPromoButtonActionPerformed(evt);
             }
         });
 
-        cardPromoButton3.setBackground(new java.awt.Color(0, 102, 255));
-        cardPromoButton3.setFont(new java.awt.Font("Annai MN", 0, 12)); // NOI18N
-        cardPromoButton3.setForeground(new java.awt.Color(255, 255, 255));
-        cardPromoButton3.setText("Scene");
-
-        cardPromoButton4.setBackground(new java.awt.Color(0, 102, 255));
-        cardPromoButton4.setFont(new java.awt.Font("Annai MN", 0, 12)); // NOI18N
-        cardPromoButton4.setForeground(new java.awt.Color(255, 255, 255));
-        cardPromoButton4.setText("Aeroplan");
-
-        cardPromoButton5.setBackground(new java.awt.Color(0, 102, 255));
-        cardPromoButton5.setFont(new java.awt.Font("Annai MN", 0, 12)); // NOI18N
-        cardPromoButton5.setForeground(new java.awt.Color(255, 255, 255));
-        cardPromoButton5.setText("Starbucks");
-        cardPromoButton5.addActionListener(new java.awt.event.ActionListener() {
+        pcOptimumPromoButton.setBackground(new java.awt.Color(0, 102, 255));
+        pcOptimumPromoButton.setFont(new java.awt.Font("Annai MN", 0, 12)); // NOI18N
+        pcOptimumPromoButton.setForeground(new java.awt.Color(255, 255, 255));
+        pcOptimumPromoButton.setText("PC Optimum");
+        pcOptimumPromoButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cardPromoButton5ActionPerformed(evt);
-            }
-        });
-
-        cardPromoButton6.setBackground(new java.awt.Color(0, 102, 255));
-        cardPromoButton6.setFont(new java.awt.Font("Annai MN", 0, 12)); // NOI18N
-        cardPromoButton6.setForeground(new java.awt.Color(255, 255, 255));
-        cardPromoButton6.setText("Points");
-        cardPromoButton6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cardPromoButton6ActionPerformed(evt);
-            }
-        });
-
-        cardPromoButton7.setBackground(new java.awt.Color(0, 102, 255));
-        cardPromoButton7.setFont(new java.awt.Font("Annai MN", 0, 12)); // NOI18N
-        cardPromoButton7.setForeground(new java.awt.Color(255, 255, 255));
-        cardPromoButton7.setText("H & M");
-        cardPromoButton7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cardPromoButton7ActionPerformed(evt);
-            }
-        });
-
-        cardPromoButton8.setBackground(new java.awt.Color(0, 102, 255));
-        cardPromoButton8.setFont(new java.awt.Font("Annai MN", 0, 12)); // NOI18N
-        cardPromoButton8.setForeground(new java.awt.Color(255, 255, 255));
-        cardPromoButton8.setText("UNIQLO");
-        cardPromoButton8.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cardPromoButton8ActionPerformed(evt);
-            }
-        });
-
-        cardPromoButton9.setBackground(new java.awt.Color(0, 102, 255));
-        cardPromoButton9.setFont(new java.awt.Font("Annai MN", 0, 12)); // NOI18N
-        cardPromoButton9.setForeground(new java.awt.Color(255, 255, 255));
-        cardPromoButton9.setText("PC Optimum");
-        cardPromoButton9.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cardPromoButton9ActionPerformed(evt);
+                pcOptimumPromoButtonActionPerformed(evt);
             }
         });
 
@@ -148,62 +93,32 @@ public class PromotionsPanel extends javax.swing.JPanel {
             }
         });
 
-        cardPromoButton10.setBackground(new java.awt.Color(0, 102, 255));
-        cardPromoButton10.setFont(new java.awt.Font("Annai MN", 0, 12)); // NOI18N
-        cardPromoButton10.setForeground(new java.awt.Color(255, 255, 255));
-        cardPromoButton10.setText("PC Optimum");
-        cardPromoButton10.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cardPromoButton10ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(47, 47, 47)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(cardPromoButton9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cardPromoButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cardPromoButton7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cardPromoButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cardPromoButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cardPromoButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cardPromoButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cardPromoButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cardPromoButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(allCardsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cardPromoButton10, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(48, Short.MAX_VALUE))
+                .addGap(42, 42, 42)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pcOptimumPromoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(starbucksPromoButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(timHortonsButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(allCardsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(53, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(26, 26, 26)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(67, 67, 67)
                 .addComponent(allCardsButton)
-                .addGap(18, 18, 18)
-                .addComponent(cardPromoButton2)
-                .addGap(18, 18, 18)
-                .addComponent(cardPromoButton3)
-                .addGap(18, 18, 18)
-                .addComponent(cardPromoButton4)
-                .addGap(18, 18, 18)
-                .addComponent(cardPromoButton5)
-                .addGap(18, 18, 18)
-                .addComponent(cardPromoButton6)
-                .addGap(18, 18, 18)
-                .addComponent(cardPromoButton7)
-                .addGap(18, 18, 18)
-                .addComponent(cardPromoButton8)
-                .addGap(18, 18, 18)
-                .addComponent(cardPromoButton9)
-                .addGap(18, 18, 18)
-                .addComponent(cardPromoButton1)
-                .addGap(18, 18, 18)
-                .addComponent(cardPromoButton10)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addGap(80, 80, 80)
+                .addComponent(timHortonsButton)
+                .addGap(80, 80, 80)
+                .addComponent(starbucksPromoButton)
+                .addGap(80, 80, 80)
+                .addComponent(pcOptimumPromoButton)
+                .addContainerGap(93, Short.MAX_VALUE))
         );
 
         jSplitPane1.setLeftComponent(jPanel1);
@@ -284,39 +199,38 @@ public class PromotionsPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cardPromoButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cardPromoButton5ActionPerformed
+    private void starbucksPromoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_starbucksPromoButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_cardPromoButton5ActionPerformed
-
-    private void cardPromoButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cardPromoButton2ActionPerformed
-        /** Currently Tim Horton's is hard-coded but this value will be dynamic. */
-        ArrayList <String> cardPromotions = getCardPromotions("Tim Hortons");
-        promotionsTitleLabel.setText(cardPromotions.get(0));
+        /** Currently Starbucks is hard-coded but this value will be dynamic. */
+        ArrayList <Promotion> cardPromotions = DatabaseConnector.getSelectPromotions("Starbucks");
         
         /** Setting the all promotion labels as visible*/
-        setAllPromotionLabelsVisible();
+        setAllPromotionLabelsHidden();
+        
+        /** Displaying the promotions into the labels */
+        displayPromotionsInLabels(cardPromotions);
+    }//GEN-LAST:event_starbucksPromoButtonActionPerformed
+
+    private void timHortonsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_timHortonsButtonActionPerformed
+        /** Currently Tim Horton's is hard-coded but this value will be dynamic. */
+//        ArrayList <String> cardPromotions = getCardPromotions("Tim Hortons");
+//        promotionsTitleLabel.setText(cardPromotions.get(0));
+        
+        // change this to the other function later
+        ArrayList <Promotion> cardPromotions = DatabaseConnector.getSelectPromotions("Tim Hortons");
+        
+        /** Setting the all promotion labels as visible*/
+        setAllPromotionLabelsHidden();
         
         /** Displaying the promotions into the labels */
         displayPromotionsInLabels(cardPromotions);
         
         
-    }//GEN-LAST:event_cardPromoButton2ActionPerformed
+    }//GEN-LAST:event_timHortonsButtonActionPerformed
 
-    private void cardPromoButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cardPromoButton6ActionPerformed
+    private void pcOptimumPromoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pcOptimumPromoButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_cardPromoButton6ActionPerformed
-
-    private void cardPromoButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cardPromoButton7ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cardPromoButton7ActionPerformed
-
-    private void cardPromoButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cardPromoButton8ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cardPromoButton8ActionPerformed
-
-    private void cardPromoButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cardPromoButton9ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cardPromoButton9ActionPerformed
+    }//GEN-LAST:event_pcOptimumPromoButtonActionPerformed
 
     /**
      * This is when the 'All Cards' button is clicked.
@@ -324,41 +238,24 @@ public class PromotionsPanel extends javax.swing.JPanel {
      * @param evt 
      */
     private void allCardsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_allCardsButtonActionPerformed
-        ArrayList <String> allCardPromotions = getCardPromotions("All");
-        promotionsTitleLabel.setText(allCardPromotions.get(0));
+//        ArrayList <Promotions> allCardPromotions = getCardPromotions("All");
+        promotionsTitleLabel.setText("Top Promotions!");
 
         /** First set all the promotion labels to visible */
         setAllPromotionLabelsVisible();
         
         /** Displaying the promotions into the labels */
-        displayPromotionsInLabels(allCardPromotions);
+//        displayPromotionsInLabels(allCardPromotions);
     }//GEN-LAST:event_allCardsButtonActionPerformed
-
-    private void cardPromoButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cardPromoButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cardPromoButton1ActionPerformed
-
-    private void cardPromoButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cardPromoButton10ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cardPromoButton10ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton allCardsButton;
-    private javax.swing.JButton cardPromoButton1;
-    private javax.swing.JButton cardPromoButton10;
-    private javax.swing.JButton cardPromoButton2;
-    private javax.swing.JButton cardPromoButton3;
-    private javax.swing.JButton cardPromoButton4;
-    private javax.swing.JButton cardPromoButton5;
-    private javax.swing.JButton cardPromoButton6;
-    private javax.swing.JButton cardPromoButton7;
-    private javax.swing.JButton cardPromoButton8;
-    private javax.swing.JButton cardPromoButton9;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JSplitPane jSplitPane1;
+    private javax.swing.JButton pcOptimumPromoButton;
     private javax.swing.JLabel promotionEligibilityLabel1;
     private javax.swing.JLabel promotionEligibilityLabel2;
     private javax.swing.JLabel promotionEligibilityLabel3;
@@ -366,6 +263,8 @@ public class PromotionsPanel extends javax.swing.JPanel {
     private javax.swing.JLabel promotionMessageLabel2;
     private javax.swing.JLabel promotionMessageLabel3;
     private javax.swing.JLabel promotionsTitleLabel;
+    private javax.swing.JButton starbucksPromoButton;
+    private javax.swing.JButton timHortonsButton;
     // End of variables declaration//GEN-END:variables
 
     /**
@@ -417,45 +316,87 @@ public class PromotionsPanel extends javax.swing.JPanel {
         promotionEligibilityLabel3.setVisible(true);
     }
     
-    public void displayPromotionsInLabels(ArrayList <String> cardPromotions){
-        System.out.println(cardPromotions.size());
-        System.out.println(cardPromotions.get(1));
-        System.out.println(cardPromotions.get(2));
-        if(cardPromotions.size() < 3){
-            /** Setting all  labels as invisible */
-            promotionMessageLabel1.setVisible(false);
-            promotionEligibilityLabel1.setVisible(false);
-            promotionMessageLabel2.setVisible(false);
-            promotionEligibilityLabel2.setVisible(false);
-            promotionMessageLabel3.setVisible(false);
-            promotionEligibilityLabel3.setVisible(false);
-        }
-        if(cardPromotions.size() == 3){
-            /** This means there is only one promotion */
-            promotionMessageLabel1.setText(cardPromotions.get(1));
-            promotionEligibilityLabel1.setText(cardPromotions.get(2));
-            
-            /** Next setting the other labels as invisible */
-            promotionMessageLabel2.setVisible(false);
-            promotionEligibilityLabel2.setVisible(false);
-            promotionMessageLabel3.setVisible(false);
-            promotionEligibilityLabel3.setVisible(false);
-        } 
-        if(cardPromotions.size() == 5){
-            promotionMessageLabel2.setText(cardPromotions.get(3));
-            promotionEligibilityLabel2.setText(cardPromotions.get(4));
-            
-            /** Next setting the other labels as invisible */            
-            promotionMessageLabel3.setVisible(false);
-            promotionEligibilityLabel3.setVisible(false);
-        } 
-        if(cardPromotions.size() >= 7){
-            promotionMessageLabel1.setText(cardPromotions.get(1));
-            promotionEligibilityLabel1.setText(cardPromotions.get(2));
-            promotionMessageLabel2.setText(cardPromotions.get(3));
-            promotionEligibilityLabel2.setText(cardPromotions.get(4));
-            promotionMessageLabel3.setText(cardPromotions.get(5));
-            promotionEligibilityLabel3.setText(cardPromotions.get(6));
-        } 
+    public void setAllPromotionLabelsHidden(){
+        promotionMessageLabel1.setVisible(false);
+        promotionEligibilityLabel1.setVisible(false);
+        promotionMessageLabel2.setVisible(false);
+        promotionEligibilityLabel2.setVisible(false);
+        promotionMessageLabel3.setVisible(false);
+        promotionEligibilityLabel3.setVisible(false);
     }
+    
+    public void displayPromotionsInLabels(ArrayList <Promotion> cardPromotions){
+        int numberOfPromotions = cardPromotions.size();
+        System.out.println(Integer.toString(numberOfPromotions));
+//        if(numberOfPromotions == 0){
+//            /** Edge case - no promotions added? */
+//        }
+        if(numberOfPromotions >= 1){
+            /** This means there is only one promotion */
+            promotionMessageLabel1.setText(cardPromotions.get(0).getPromotionName());
+            promotionEligibilityLabel1.setText("Eligibility: "+Integer.toString(cardPromotions.get(0).getEligiblePoints())+" points");
+            
+            /** Next making these labels visible */
+            promotionMessageLabel1.setVisible(true);
+            promotionEligibilityLabel1.setVisible(true);
+        } 
+        if(numberOfPromotions >= 2){
+            promotionMessageLabel2.setText(cardPromotions.get(1).getPromotionName());
+            promotionEligibilityLabel2.setText("Eligibility: "+Integer.toString(cardPromotions.get(1).getEligiblePoints())+" points");
+            
+            /** Next setting these labels visible */            
+            promotionMessageLabel2.setVisible(true);
+            promotionEligibilityLabel2.setVisible(true);
+        } 
+        if(numberOfPromotions >= 3){
+            promotionMessageLabel3.setText(cardPromotions.get(2).getPromotionName());
+            promotionEligibilityLabel3.setText("Eligibility: "+Integer.toString(cardPromotions.get(2).getEligiblePoints())+" points");
+            
+            /** Next setting these labels visible */            
+            promotionMessageLabel3.setVisible(true);
+            promotionEligibilityLabel3.setVisible(true);
+        }
+    }
+    
+//    public void displayPromotionsInLabels(ArrayList <String> cardPromotions){
+//        System.out.println(cardPromotions.size());
+//        System.out.println(cardPromotions.get(1));
+//        System.out.println(cardPromotions.get(2));
+//        if(cardPromotions.size() < 3){
+//            /** Setting all  labels as invisible */
+//            promotionMessageLabel1.setVisible(false);
+//            promotionEligibilityLabel1.setVisible(false);
+//            promotionMessageLabel2.setVisible(false);
+//            promotionEligibilityLabel2.setVisible(false);
+//            promotionMessageLabel3.setVisible(false);
+//            promotionEligibilityLabel3.setVisible(false);
+//        }
+//        if(cardPromotions.size() == 3){
+//            /** This means there is only one promotion */
+//            promotionMessageLabel1.setText(cardPromotions.get(1));
+//            promotionEligibilityLabel1.setText(cardPromotions.get(2));
+//            
+//            /** Next setting the other labels as invisible */
+//            promotionMessageLabel2.setVisible(false);
+//            promotionEligibilityLabel2.setVisible(false);
+//            promotionMessageLabel3.setVisible(false);
+//            promotionEligibilityLabel3.setVisible(false);
+//        } 
+//        if(cardPromotions.size() == 5){
+//            promotionMessageLabel2.setText(cardPromotions.get(3));
+//            promotionEligibilityLabel2.setText(cardPromotions.get(4));
+//            
+//            /** Next setting the other labels as invisible */            
+//            promotionMessageLabel3.setVisible(false);
+//            promotionEligibilityLabel3.setVisible(false);
+//        } 
+//        if(cardPromotions.size() >= 7){
+//            promotionMessageLabel1.setText(cardPromotions.get(1));
+//            promotionEligibilityLabel1.setText(cardPromotions.get(2));
+//            promotionMessageLabel2.setText(cardPromotions.get(3));
+//            promotionEligibilityLabel2.setText(cardPromotions.get(4));
+//            promotionMessageLabel3.setText(cardPromotions.get(5));
+//            promotionEligibilityLabel3.setText(cardPromotions.get(6));
+//        } 
+//    }
 }
