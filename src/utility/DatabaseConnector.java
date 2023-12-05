@@ -299,15 +299,16 @@ public class DatabaseConnector {
     }
     
     public static void editCard(Card oldCard, Card newCard) {
-        String query = "UPDATE CARD SET cardNo=?, type=?, expiry=?, UID=?, points=? WHERE id=?";
+        String query = "UPDATE CARD SET CardNo=?, type=?, expiry=?, UID=? WHERE CardNo=?";
 
         try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
             PreparedStatement stmt = conn.prepareStatement(query);
-            stmt.setInt(1, newCard.getUID());
+            stmt.setInt(1, newCard.getCardNo());
             stmt.setString(2, newCard.getType());
-            stmt.setInt(3, oldCard.getCardNo());
-            stmt.setDate(4, new java.sql.Date(newCard.getExpiry().getTime())); //new java.sql.Date(newCard.getExpiry().getTime()));
-            stmt.setInt(5, newCard.getPoints());
+            stmt.setDate(3, new java.sql.Date(newCard.getExpiry().getTime())); //new java.sql.Date(newCard.getExpiry().getTime()));
+            stmt.setInt(4, newCard.getUID());
+            stmt.setInt(5, oldCard.getCardNo());
+            
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
