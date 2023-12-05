@@ -5,24 +5,49 @@
 package LoginPanel;
 
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
+import model.User;
+import utility.DatabaseConnector;
+
 
 /**
  *
  * @author gauravvraii
  */
 public class RegistrationMainFrame extends javax.swing.JFrame {
+    
+    private String hashedPassword;
 
     /**
      * Creates new form RegistrationMainFrame
      */
     public RegistrationMainFrame() {
         initComponents();
+        
+    }
+    private static String hashPassword(String password) {
+        try {
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            byte[] hashedBytes = md.digest(password.getBytes());
+
+            // Convert the byte array to a hexadecimal string
+            StringBuilder stringBuilder = new StringBuilder();
+            for (byte b : hashedBytes) {
+                stringBuilder.append(String.format("%02x", b));
+            }
+
+            return stringBuilder.toString();
+        } catch (NoSuchAlgorithmException e) {
+            // Handle the exception appropriately (e.g., log it)
+            e.printStackTrace();
+            return null;
+        }
     }
 
     /**
@@ -205,9 +230,9 @@ public class RegistrationMainFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(emailLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(mainPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(passwordErrorLabel)
-                    .addComponent(JPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(mainPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(JPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(passwordErrorLabel))
                 .addGap(18, 18, 18)
                 .addComponent(submitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(17, 17, 17))
@@ -240,15 +265,44 @@ public class RegistrationMainFrame extends javax.swing.JFrame {
         Date dob = JDateChooser.getDate();
         char[] passwordChar = JPasswordField.getPassword();
         String password = new String(passwordChar);
+        
 
         if (name.isEmpty() || email.isEmpty() || password.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Please fill in all required fields", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
-            JOptionPane.showMessageDialog(this, "Name: " + name + "\nEmail: " + email + "\nDOB: " + dob, "Successfully Registered", JOptionPane.INFORMATION_MESSAGE);  
-            LoginMainFrame loginFrame = new LoginMainFrame();
-            loginFrame.setVisible(true);
-            this.dispose();    
+            try {
+                hashedPassword = hashPassword(password);
+                System.out.println("Hashed Password during registration: " + hashedPassword);
+                System.out.println("Hashed Password: " + hashedPassword);
+                
+                JOptionPane.showMessageDialog(this, "Name: " + name + "\nEmail: " + email + "\nDOB: " + dob, "Successfully Registered", JOptionPane.INFORMATION_MESSAGE); 
+                JOptionPane.showMessageDialog(null, "Successfully Login", "User Information", JOptionPane.INFORMATION_MESSAGE);
+            } catch (Exception e){
+                e.printStackTrace();
+            }
+                
 }
+        //Insert into DB
+                User newUser = new User(email, hashedPassword);
+
+        try{
+            newUser.setName(nameTextField.getText());
+            newUser.setEmail(emailTextField.getText());
+            newUser.setDOB(JDateChooser.getDate());
+            newUser.setPassword(hashedPassword);
+
+            
+            //insert into DB
+            DatabaseConnector.addUser(newUser);
+            JOptionPane.showMessageDialog(null, "User Registered Successfully", "Successful Registration", JOptionPane.INFORMATION_MESSAGE);
+
+            cleanup();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        }
+        LoginMainFrame loginFrame = new LoginMainFrame();
+        loginFrame.setVisible(true);
+        this.dispose();
 
 //        JOptionPane.showMessageDialog(this, "Name: " + name + "\nEmail: " + email + "\nDOB: " + dob + "\nPassword: " + password, "Successfully Registered", JOptionPane.INFORMATION_MESSAGE);
 
@@ -370,4 +424,14 @@ public class RegistrationMainFrame extends javax.swing.JFrame {
     private javax.swing.JButton submitButton;
     private javax.swing.JLabel titleLabel;
     // End of variables declaration//GEN-END:variables
+
+    private void cleanup() {
+        nameTextField.setText("");
+        emailTextField.setText("");
+        JDateChooser.setDate(null);
+        JPasswordField.setText("");
+    }
+    
+    
+
 }

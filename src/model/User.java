@@ -1,4 +1,3 @@
-
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
@@ -11,12 +10,29 @@ import java.util.Date;
  * @author saahilk
  */
 public class User {
+
+    public User(String email1, String hashedPassword) {
+    }
  
        String name;      
        String email;
        int UID;
        String password;
        Date DOB;
+
+    
+    // Default constructor
+    public User() {
+    }
+
+    // Parameterized constructor
+    public User(String name, String email, int id, Date dob, String password) {
+        this.name = name;
+        this.email = email;
+        this.UID = id;
+        this.DOB = dob;
+        this.password = password;
+    }   
        
     public String getName() {
         return name;

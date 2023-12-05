@@ -10,6 +10,9 @@ import java.security.NoSuchAlgorithmException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
+import model.User;
+import utility.DatabaseConnector;
+import view.MainFrame;
 
 
 /**
@@ -17,6 +20,8 @@ import javax.swing.JOptionPane;
  * @author gauravvraii
  */
 public class LoginMainFrame extends javax.swing.JFrame {
+    
+    private String hashedPassword;
 
     /**
      * Creates new form LoginMainFrame
@@ -227,21 +232,49 @@ public class LoginMainFrame extends javax.swing.JFrame {
         char[] passwordChar = JPasswordField.getPassword();
         String password = new String(passwordChar);
 
-        if (email.isEmpty() || password.isEmpty()) {
+           if (email.isEmpty() || password.isEmpty()) {
         JOptionPane.showMessageDialog(null, "Please fill in all required fields", "Error", JOptionPane.ERROR_MESSAGE);
-        } else {
-            try {
-            String hashedPassword = hashPassword(password);
-            System.out.println("Hashed Password: " + hashedPassword);
+    } else {
+        try {
+            // Check if the user exists in the database
+            if (!DatabaseConnector.userExists(email)) {
+                System.out.println("Invalid user. Showing error message.");
+                JOptionPane.showMessageDialog(null, "Invalid user. Please check your credentials", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
 
-            JOptionPane.showMessageDialog(this, "\nEmail: " + email + "\nSuccess ", "Successfully Registered", JOptionPane.INFORMATION_MESSAGE);
-            JOptionPane.showMessageDialog(null, "Successfully Login", "User Information", JOptionPane.INFORMATION_MESSAGE);
+            // Hash the entered password
+            String enteredHashedPassword = hashPassword(password);
+
+            if (enteredHashedPassword == null) {
+                // Handle the case where hashing failed
+                System.out.println("Password hashing failed. Showing error message.");
+                JOptionPane.showMessageDialog(this, "Password hashing failed", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            // Get the hashed password stored in the database
+            String storedHashedPassword = DatabaseConnector.getPasswordHash(email);
+
+            // Compare the entered hashed password with the stored hashed password
+            if (enteredHashedPassword.equals(storedHashedPassword)) {
+                System.out.println("Login successful. Navigating to MainFrame.");
+
+                MainFrame mainFrame = new MainFrame();
+                mainFrame.setVisible(true);
+                this.dispose();
+
+                JOptionPane.showMessageDialog(null, "Successfully Login", "User Information", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                System.out.println("Invalid user. Showing error message.");
+                JOptionPane.showMessageDialog(null, "Invalid user. Please check your credentials", "Error", JOptionPane.ERROR_MESSAGE);
+            }
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-            
     }
+
     }//GEN-LAST:event_loginButtonActionPerformed
 
     private void registerLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_registerLabelMouseClicked
@@ -375,4 +408,10 @@ public class LoginMainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel registerLabel;
     private javax.swing.JLabel titleLabel;
     // End of variables declaration//GEN-END:variables
+
+        private void cleanup() {
+        emailTextField.setText("");
+        JPasswordField.setText("");
+    }   
+
 }

@@ -6,7 +6,6 @@ package utility;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Date;
 import model.User;
 import model.Card;
 import model.Promotions;
@@ -19,6 +18,57 @@ public class DatabaseConnector {
     private static final String URL = "jdbc:mysql://localhost:3306/test?useSSL=false";
     private static final String USERNAME = "root";
     private static final String PASSWORD = "root";
+
+    public static boolean isUserExists(User user) {
+        String query = "SELECT COUNT(*) FROM USER WHERE email = ? AND password = SHA2(?, 256)";
+        try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
+        PreparedStatement stmt = conn.prepareStatement(query);
+        stmt.setString(1, user.getEmail());
+        stmt.setString(2, user.getPassword());
+        ResultSet rs = stmt.executeQuery();
+        rs.next(); // Move to the first row
+        int count = rs.getInt(1);
+        return count > 0; // If count is greater than 0, user exists
+    } catch (SQLException e) {
+        e.printStackTrace();
+        return false;
+    }
+   
+    }
+    
+        public static boolean userExists(String email) {
+        String query = "SELECT COUNT(*) FROM USER WHERE email = ?";
+        try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
+            PreparedStatement stmt = conn.prepareStatement(query);
+            stmt.setString(1, email);
+            ResultSet rs = stmt.executeQuery();
+            rs.next(); // Move to the first row
+            int count = rs.getInt(1);
+            return count > 0; // If count is greater than 0, user exists
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+        
+        public static String getPasswordHash(String email) {
+    String query = "SELECT password FROM USER WHERE email = ?";
+    
+    try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
+        PreparedStatement stmt = conn.prepareStatement(query);
+        stmt.setString(1, email);
+        ResultSet rs = stmt.executeQuery();
+        
+        if (rs.next()) {
+            return rs.getString("password");
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    
+    return null;
+}
+
 
     /**
      * Privatized constructor so as to not allow object creation
@@ -255,5 +305,7 @@ public class DatabaseConnector {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        
+        
     }
 }
