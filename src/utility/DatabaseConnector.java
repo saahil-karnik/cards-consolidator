@@ -139,6 +139,53 @@ public class DatabaseConnector {
         return card;
     }
     
+    public static Card getCard(String cardType, int userID){
+        Card c = new Card();
+        String query = "SELECT * FROM CARD WHERE Type=? AND UID=?";
+        try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
+            PreparedStatement stmt = conn.prepareStatement(query);
+            stmt.setString(1, cardType);
+            stmt.setInt(2, userID);
+            
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()){
+                c.setUID(rs.getInt("UID"));
+                c.setType(rs.getString("Type"));
+                c.setExpiry(rs.getDate("Expiry"));
+                c.setPoints(rs.getInt("Points"));
+                c.setCardNo(rs.getInt("CardNo"));
+            }
+            rs.close();
+//            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return c;
+    }
+    
+//    public static ArrayList<Card> getCards(User user){
+//        ArrayList<Card> card = new ArrayList<>();
+//        String query = "SELECT * FROM CARD WHERE UID=?";
+//        try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
+//            Statement stmt = conn.createStatement();
+//            ResultSet rs = stmt.executeQuery(query);
+//            while (rs.next()) {
+//                Card c = new Card();
+//                c.setUID(rs.getInt("UID"));
+//                c.setType(rs.getString("Type"));
+//                c.setExpiry(rs.getDate("Expiry"));
+//                c.setPoints(rs.getInt("Points"));
+//                c.setCardNo(rs.getInt("CardNo"));
+//                card.add(c);
+//            }
+//            rs.close();
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//
+//        return card;
+//    }
+    
     public static ArrayList<Promotions> getAllPromotions() {
 //        return list of users from db
         ArrayList<Promotions> promotion = new ArrayList<>();
