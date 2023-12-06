@@ -437,22 +437,22 @@ public class Card_Panel extends javax.swing.JPanel {
      * Currently this is specifically a Starbucks card, however in the future we can set this to be any one of user's card.
      * @param evt Java Mouse Click event
      * @author team4
-     * @version 2.0
+     * @version 2.1
      */
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
-        Card_textFeild4.setText("Starbucks");
 //        Card_NoFeild2.setText(newCard.);
 //        expiry2.setText(newUser.getExpiry_Date_StarBucks())
         Card starbucksCard = DatabaseConnector.getCard("StarBucks", 1);
 //        for debugging:
 //        System.out.println(dateFormat.format(starbucksCard.getExpiry()));
-        Card_NoFeild3.setText(Integer.toString(starbucksCard.getCardNo()));
-        point_text3.setText(Integer.toString(starbucksCard.getPoints()));
-        expiry3.setText( dateFormat.format(starbucksCard.getExpiry()));
-        
-        
-        
-        
+        if(starbucksCard.getType() == null){
+            JOptionPane.showMessageDialog(this, "Please add a Starbucks Card first", "No Starbucks Card Entered!", JOptionPane.INFORMATION_MESSAGE);
+        } else{
+            Card_textFeild4.setText("Starbucks");
+            Card_NoFeild3.setText(Integer.toString(starbucksCard.getCardNo()));
+            point_text3.setText(Integer.toString(starbucksCard.getPoints()));
+            expiry3.setText( dateFormat.format(starbucksCard.getExpiry()));
+        }
     }//GEN-LAST:event_jLabel5MouseClicked
 
     private void Card_textFeild1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Card_textFeild1ActionPerformed
@@ -473,7 +473,7 @@ public class Card_Panel extends javax.swing.JPanel {
     private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
         Card pcOptimumCard = DatabaseConnector.getCard("PC Optimum", 1);
         if(pcOptimumCard.getType() == null){
-            JOptionPane.showMessageDialog(this, "Please first add a PC Optimum Card", "No PC Optimum Card Entered!", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Please add a PC Optimum Card first.", "No PC Optimum Card Entered!", JOptionPane.INFORMATION_MESSAGE);
         } else {
             Card_textFeild1.setText(pcOptimumCard.getType());
             Card_NoFeild2.setText(Integer.toString(pcOptimumCard.getCardNo()));
