@@ -483,18 +483,23 @@ public class Card_Panel extends javax.swing.JPanel {
     }//GEN-LAST:event_jLabel8MouseClicked
 
     /**
-     * Clicking the Tim Horton's icon displays the card details if it is present.
+     * Clicking the Tim Horton's icon displays the card details - if it is present.
      * Currently this is specifically a Tim Horton's card, however in the future we can set this to be any one of user's card.
      * @param evt Java Mouse Click event
      * @author team4
      * @version 2.0
      */
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
-        Card_textFeild.setText("Tim Horton");
         Card timHortonsCard = new Card();
         timHortonsCard = DatabaseConnector.getCard("Tim Hortons", 1);
-//         Card_NoFeild1.setText(newUser.getCard_NO_tim());
-//         expiry1.setText(newUser.getExpiry_Date_tim());
+        if(timHortonsCard.getType() == null){
+            JOptionPane.showMessageDialog(this, "Please add a Tim Horton's Card first.", "No Tim Horton's Card Entered!", JOptionPane.INFORMATION_MESSAGE);
+        } else{
+            this.Card_textFeild.setText(timHortonsCard.getType());
+            this.Card_NoFeild1.setText(Integer.toString(timHortonsCard.getCardNo()));
+            this.points_text1.setText(Integer.toString(timHortonsCard.getPoints()));
+            this.expiry1.setText(this.dateFormat.format(timHortonsCard.getExpiry()));
+        }
     }//GEN-LAST:event_jLabel2MouseClicked
 
     private void Card_textFeildActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Card_textFeildActionPerformed
