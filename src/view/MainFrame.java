@@ -150,9 +150,10 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_promotionsButtonActionPerformed
 
     private void cardsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cardsButtonActionPerformed
-        ArrayList <Card> userCards = DatabaseConnector.getUserCards('2');
+        ArrayList <Card> userCards = DatabaseConnector.getUserCards(1);
         if(userCards.isEmpty()){
 //            System.out.println("Empty No cards");
+//            System.out.println(userCards);
             NoCardPanel noCardPanel = new NoCardPanel(bottomPanel);
             bottomPanel.add(noCardPanel);
             CardLayout layout = (CardLayout) bottomPanel.getLayout();
