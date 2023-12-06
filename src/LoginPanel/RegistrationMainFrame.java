@@ -75,6 +75,7 @@ public class RegistrationMainFrame extends javax.swing.JFrame {
         passwordErrorLabel = new javax.swing.JLabel();
         JDateChooser = new com.toedter.calendar.JDateChooser();
         JPasswordField = new javax.swing.JPasswordField();
+        backButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(835, 654));
@@ -169,6 +170,15 @@ public class RegistrationMainFrame extends javax.swing.JFrame {
             }
         });
 
+        backButton.setBackground(new java.awt.Color(0, 102, 255));
+        backButton.setFont(new java.awt.Font("Kailasa", 1, 13)); // NOI18N
+        backButton.setText("Back");
+        backButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout mainPanel2Layout = new javax.swing.GroupLayout(mainPanel2);
         mainPanel2.setLayout(mainPanel2Layout);
         mainPanel2Layout.setHorizontalGroup(
@@ -178,7 +188,9 @@ public class RegistrationMainFrame extends javax.swing.JFrame {
                 .addComponent(RegistrationPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(117, 117, 117))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(17, 17, 17)
+                .addComponent(backButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(titleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 444, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(161, 161, 161))
             .addGroup(mainPanel2Layout.createSequentialGroup()
@@ -207,8 +219,13 @@ public class RegistrationMainFrame extends javax.swing.JFrame {
         mainPanel2Layout.setVerticalGroup(
             mainPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mainPanel2Layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addComponent(titleLabel)
+                .addGroup(mainPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(mainPanel2Layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addComponent(titleLabel))
+                    .addGroup(mainPanel2Layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(RegistrationPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -371,6 +388,12 @@ public class RegistrationMainFrame extends javax.swing.JFrame {
 
     }//GEN-LAST:event_JPasswordFieldActionPerformed
 
+    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
+        // TODO add your handling code here:
+        dispose(); // Close the current frame
+        new LoginMainFrame().setVisible(true); // Show the login frame
+    }//GEN-LAST:event_backButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -411,6 +434,7 @@ public class RegistrationMainFrame extends javax.swing.JFrame {
     private javax.swing.JPasswordField JPasswordField;
     private javax.swing.JPanel RegistrationPanel;
     private javax.swing.JLabel RegistrationTitleLabel;
+    private javax.swing.JButton backButton;
     private javax.swing.JLabel dobLabel;
     private javax.swing.JLabel emailErrorLabel;
     private javax.swing.JLabel emailLabel;
