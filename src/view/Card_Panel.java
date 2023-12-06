@@ -42,6 +42,7 @@ public class Card_Panel extends javax.swing.JPanel {
     private User loggedInUser;
     private User newUser;
     private JPanel BottomPanel;
+    private final DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
     
 //    public Card_Panel(user newUser){
 //        
@@ -94,6 +95,9 @@ public class Card_Panel extends javax.swing.JPanel {
         expiry3 = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
         deleteButton = new javax.swing.JButton();
+        editStarbucksButton = new javax.swing.JButton();
+        editPCOptimumButton = new javax.swing.JButton();
+        editTimHortonsButton = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setForeground(new java.awt.Color(204, 204, 204));
@@ -236,82 +240,102 @@ public class Card_Panel extends javax.swing.JPanel {
         jLabel16.setText("Card No:");
 
         deleteButton.setFont(new java.awt.Font("Annai MN", 0, 13)); // NOI18N
-        deleteButton.setText("Delete Card");
+        deleteButton.setText("Delete A Card");
         deleteButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 deleteButtonActionPerformed(evt);
             }
         });
 
+        editStarbucksButton.setFont(new java.awt.Font("Annai MN", 0, 13)); // NOI18N
+        editStarbucksButton.setText("Edit Card");
+
+        editPCOptimumButton.setFont(new java.awt.Font("Annai MN", 0, 13)); // NOI18N
+        editPCOptimumButton.setText("Edit Card");
+
+        editTimHortonsButton.setFont(new java.awt.Font("Annai MN", 0, 13)); // NOI18N
+        editTimHortonsButton.setText("Edit Card");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(67, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(304, 304, 304)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(deleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(309, 309, 309))
-            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel11)
-                            .addComponent(jLabel12))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(points_text1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(expiry1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Card_NoFeild1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Card_textFeild, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(80, 80, 80)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jLabel14))
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel11)
+                                    .addComponent(jLabel12))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(points_text1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(expiry1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(Card_NoFeild1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(Card_textFeild, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(80, 80, 80)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jLabel6)
+                                            .addComponent(jLabel14))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(expiry2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGap(2, 2, 2)
+                                                .addComponent(point_text2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGap(26, 26, 26)
+                                                .addComponent(jLabel7))
+                                            .addComponent(jLabel13, javax.swing.GroupLayout.Alignment.TRAILING))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(expiry2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(2, 2, 2)
-                                        .addComponent(point_text2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(Card_NoFeild2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(Card_textFeild1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGap(20, 20, 20)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel10)
+                                    .addComponent(jLabel9)
+                                    .addComponent(jLabel16)
+                                    .addComponent(jLabel15))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(Card_NoFeild3, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(Card_textFeild4, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(point_text3, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(expiry3, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(26, 26, 26)
-                                        .addComponent(jLabel7))
-                                    .addComponent(jLabel13, javax.swing.GroupLayout.Alignment.TRAILING))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(Card_NoFeild2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(Card_textFeild1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(20, 20, 20)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel5)))
+                        .addContainerGap(10, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel10)
-                            .addComponent(jLabel9)
-                            .addComponent(jLabel16)
-                            .addComponent(jLabel15))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Card_NoFeild3, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Card_textFeild4, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(point_text3, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(expiry3, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel5)))
-                .addContainerGap())
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(81, 81, 81)
+                                .addComponent(editTimHortonsButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(editPCOptimumButton))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jLabel1)
+                                .addGap(294, 294, 294)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(deleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(180, 180, 180)
+                        .addComponent(editStarbucksButton)
+                        .addGap(48, 48, 48))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -379,17 +403,23 @@ public class Card_Panel extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(expiry3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel15))))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(92, 92, 92)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(editTimHortonsButton)
+                            .addComponent(editPCOptimumButton))
+                        .addGap(51, 51, 51)
                         .addComponent(jLabel1)
                         .addGap(69, 69, 69))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(13, 13, 13)
+                        .addComponent(editStarbucksButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton1)
                         .addGap(12, 12, 12)
                         .addComponent(deleteButton)
-                        .addGap(31, 31, 31))))
+                        .addGap(28, 28, 28))))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -402,18 +432,20 @@ public class Card_Panel extends javax.swing.JPanel {
         layout.next(BottomPanel);
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    /**
+     * Clicking on Starbucks icon displays the card details - if present.
+     * Currently this is specifically a Starbucks card, however in the future we can set this to be any one of user's card.
+     * @param evt Java Mouse Click event
+     * @author team4
+     * @version 2.0
+     */
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
-        // TODO add your handling code here:
-      
-        Random random = new Random();
-        int randomValue = random.nextInt(1000);
         Card_textFeild4.setText("Starbucks");
 //        Card_NoFeild2.setText(newCard.);
 //        expiry2.setText(newUser.getExpiry_Date_StarBucks())
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
         Card starbucksCard = DatabaseConnector.getCard("StarBucks", 1);
 //        for debugging:
-//        System.out.println(starbucksCard.getCardNo());
+//        System.out.println(dateFormat.format(starbucksCard.getExpiry()));
         Card_NoFeild3.setText(Integer.toString(starbucksCard.getCardNo()));
         point_text3.setText(Integer.toString(starbucksCard.getPoints()));
         expiry3.setText( dateFormat.format(starbucksCard.getExpiry()));
@@ -431,33 +463,36 @@ public class Card_Panel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_Card_textFeild4ActionPerformed
 
+    /**
+     * Clicking on PC Optimum icon displays the card details - if present.
+     * Currently this is specifically a PC Optimum card, however in the future we can set this to be any one of user's card.
+     * @param evt Java Mouse Click event
+     * @author team4
+     * @version 2.0
+     */
     private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
-        // TODO add your handling code here:
-        Random random = new Random();
-        int randomValue = random.nextInt(1000);
-//        point_text2.setText(String.valueOf(randomValue));
-//        Card_textFeild1.setText("PC Optimum");
-//         Card_NoFeild2.setText(newUser.getCard_NO_Pcoptimum());
-//         expiry2.setText(newUser.getExpiry_Date_tim());
-
         Card pcOptimumCard = DatabaseConnector.getCard("PC Optimum", 1);
         if(pcOptimumCard.getType() == null){
             JOptionPane.showMessageDialog(this, "Please first add a PC Optimum Card", "No PC Optimum Card Entered!", JOptionPane.INFORMATION_MESSAGE);
         } else {
-            DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
             Card_textFeild1.setText(pcOptimumCard.getType());
             Card_NoFeild2.setText(Integer.toString(pcOptimumCard.getCardNo()));
             point_text2.setText(Integer.toString(pcOptimumCard.getPoints()));
+            expiry2.setText(this.dateFormat.format(pcOptimumCard.getExpiry()));
         }
     }//GEN-LAST:event_jLabel8MouseClicked
 
+    /**
+     * Clicking the Tim Horton's icon displays the card details if it is present.
+     * Currently this is specifically a Tim Horton's card, however in the future we can set this to be any one of user's card.
+     * @param evt Java Mouse Click event
+     * @author team4
+     * @version 2.0
+     */
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
-        // TODO add your handling code here:
-        Random random = new Random();
-        int randomValue = random.nextInt(1000);
-        points_text1.setText(String.valueOf(randomValue));
-         Card_textFeild.setText("Tim Horton");
-         DatabaseConnector.getCard("Tim Horton", 1);
+        Card_textFeild.setText("Tim Horton");
+        Card timHortonsCard = new Card();
+        timHortonsCard = DatabaseConnector.getCard("Tim Hortons", 1);
 //         Card_NoFeild1.setText(newUser.getCard_NO_tim());
 //         expiry1.setText(newUser.getExpiry_Date_tim());
     }//GEN-LAST:event_jLabel2MouseClicked
@@ -529,6 +564,9 @@ public class Card_Panel extends javax.swing.JPanel {
     private javax.swing.JTextField Card_textFeild1;
     private javax.swing.JTextField Card_textFeild4;
     private javax.swing.JButton deleteButton;
+    private javax.swing.JButton editPCOptimumButton;
+    private javax.swing.JButton editStarbucksButton;
+    private javax.swing.JButton editTimHortonsButton;
     private javax.swing.JTextField expiry1;
     private javax.swing.JTextField expiry2;
     private javax.swing.JTextField expiry3;
