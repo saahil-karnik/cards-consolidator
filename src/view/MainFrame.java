@@ -5,6 +5,9 @@
 package view;
 
 import java.awt.CardLayout;
+import java.util.ArrayList;
+import model.Card;
+import utility.DatabaseConnector;
 
 /**
  *
@@ -147,11 +150,19 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_promotionsButtonActionPerformed
 
     private void cardsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cardsButtonActionPerformed
-        // TODO add your handling code here:
-        Card_Panel newcardPanel = new Card_Panel(bottomPanel);
-        bottomPanel.add(newcardPanel);
-        CardLayout layout = (CardLayout) bottomPanel.getLayout();
-        layout.next(bottomPanel);
+        ArrayList <Card> userCards = DatabaseConnector.getUserCards('2');
+        if(userCards.isEmpty()){
+//            System.out.println("Empty No cards");
+            NoCardPanel noCardPanel = new NoCardPanel(bottomPanel);
+            bottomPanel.add(noCardPanel);
+            CardLayout layout = (CardLayout) bottomPanel.getLayout();
+            layout.next(bottomPanel);
+        } else{
+            Card_Panel newcardPanel = new Card_Panel(bottomPanel);
+            bottomPanel.add(newcardPanel);
+            CardLayout layout = (CardLayout) bottomPanel.getLayout();
+            layout.next(bottomPanel);
+        }
     }//GEN-LAST:event_cardsButtonActionPerformed
 
     /**
