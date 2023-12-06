@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package ui;
+package view;
 
 import java.awt.CardLayout;
 import javax.swing.JPanel;
@@ -11,13 +11,13 @@ import javax.swing.JPanel;
  *
  * @author Ali
  */
-public class no_card_panel extends javax.swing.JPanel {
+public class NoCardPanel extends javax.swing.JPanel {
 
     /**
-     * Creates new form no_card_panel
+     * Creates new form NoCardPanel
      */
     private JPanel BottomPanel;
-    public no_card_panel(JPanel BottomPanel) {
+    public NoCardPanel(JPanel BottomPanel) {
         this.BottomPanel= BottomPanel;
         initComponents();
     }
