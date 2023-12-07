@@ -238,8 +238,8 @@ public class LoginMainFrame extends javax.swing.JFrame {
         try {
             // Check if the user exists in the database
             if (!DatabaseConnector.userExists(email)) {
-                System.out.println("Invalid user. Showing error message.");
-                JOptionPane.showMessageDialog(null, "Invalid user. Please check your credentials", "Error", JOptionPane.ERROR_MESSAGE);
+//                System.out.println("Invalid user. Showing error message.");
+                JOptionPane.showMessageDialog(null, "User does not exists!", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
 
@@ -248,7 +248,7 @@ public class LoginMainFrame extends javax.swing.JFrame {
 
             if (enteredHashedPassword == null) {
                 // Handle the case where hashing failed
-                System.out.println("Password hashing failed. Showing error message.");
+//                System.out.println("Password hashing failed. Showing error message.");
                 JOptionPane.showMessageDialog(this, "Password hashing failed", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
@@ -258,7 +258,7 @@ public class LoginMainFrame extends javax.swing.JFrame {
 
             // Compare the entered hashed password with the stored hashed password
             if (enteredHashedPassword.equals(storedHashedPassword)) {
-                System.out.println("Login successful. Navigating to MainFrame.");
+                System.out.println("Login successful");
 
                 MainFrame mainFrame = new MainFrame();
                 mainFrame.setVisible(true);
@@ -266,7 +266,7 @@ public class LoginMainFrame extends javax.swing.JFrame {
 
                 JOptionPane.showMessageDialog(null, "Successfully Login", "User Information", JOptionPane.INFORMATION_MESSAGE);
             } else {
-                System.out.println("Invalid user. Showing error message.");
+//                System.out.println("Invalid user. Showing erro");
                 JOptionPane.showMessageDialog(null, "Invalid user. Please check your credentials", "Error", JOptionPane.ERROR_MESSAGE);
             }
 

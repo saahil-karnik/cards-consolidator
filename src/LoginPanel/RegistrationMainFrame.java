@@ -158,6 +158,11 @@ public class RegistrationMainFrame extends javax.swing.JFrame {
         passwordErrorLabel.setFont(new java.awt.Font("Arial Hebrew Scholar", 1, 14)); // NOI18N
         passwordErrorLabel.setForeground(new java.awt.Color(255, 0, 51));
 
+        JDateChooser.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                JDateChooserPropertyChange(evt);
+            }
+        });
         JDateChooser.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 JDateChooserKeyPressed(evt);
@@ -289,7 +294,7 @@ public class RegistrationMainFrame extends javax.swing.JFrame {
         } else {
             try {
                 hashedPassword = hashPassword(password);
-                System.out.println("Hashed Password during registration: " + hashedPassword);
+//                System.out.println("Hashed Password during registration: " + hashedPassword);
                 System.out.println("Hashed Password: " + hashedPassword);
                 
                 JOptionPane.showMessageDialog(this, "Name: " + name + "\nEmail: " + email + "\nDOB: " + dob, "Successfully Registered", JOptionPane.INFORMATION_MESSAGE); 
@@ -393,6 +398,11 @@ public class RegistrationMainFrame extends javax.swing.JFrame {
         dispose(); // Close the current frame
         new LoginMainFrame().setVisible(true); // Show the login frame
     }//GEN-LAST:event_backButtonActionPerformed
+
+    private void JDateChooserPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_JDateChooserPropertyChange
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_JDateChooserPropertyChange
 
     /**
      * @param args the command line arguments
