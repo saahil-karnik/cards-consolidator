@@ -8,7 +8,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import model.User;
 import model.Card;
-import model.Promotions;
+import model.Promotion;
 /**
  * Database Connector class for interacting with database
  * @author saahilk
@@ -18,6 +18,12 @@ public class DatabaseConnector {
     private static final String URL = "jdbc:mysql://localhost:3306/test?useSSL=false";
     private static final String USERNAME = "root";
     private static final String PASSWORD = "root";
+    
+    /**
+     * Privatized constructor so as to not allow object creation
+     */
+    private DatabaseConnector() {
+    } 
 
     public static boolean isUserExists(User user) {
         String query = "SELECT COUNT(*) FROM USER WHERE email = ? AND password = SHA2(?, 256)";
@@ -69,12 +75,6 @@ public class DatabaseConnector {
     return null;
 }
 
-
-    /**
-     * Privatized constructor so as to not allow object creation
-     */
-    private DatabaseConnector() {
-    } 
     /**
      * Insert given user to database
      * @see User
@@ -117,15 +117,15 @@ public class DatabaseConnector {
             e.printStackTrace();
         }
     }
-    public static void addPromotion(Promotions promotion) {
+    public static void addPromotion(Promotion promotion) {
         //add to database
         String query = "INSERT INTO PROMOTIONS(PROMOTION_ID,TYPE,ELIGIBLEPOINTS,PROMOTIONNAME) VALUES(?,?,?,?,?)";
         try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
             PreparedStatement stmt = conn.prepareStatement(query);
-            stmt.setInt(1, promotion.getPromotionID());
+            stmt.setString(1, promotion.getPromotionID());
             stmt.setString(2, promotion.getType());
-            stmt.setInt(3, promotion.getEligibilityPoints());
-            stmt.setString(4, promotion.getPromotionType());
+            stmt.setInt(3, promotion.getEligiblePoints());
+            stmt.setString(4, promotion.getPromotionName());
             int rows = stmt.executeUpdate();
             System.out.println("Rows impacted : " + rows);
 //            conn.close();
@@ -189,20 +189,67 @@ public class DatabaseConnector {
         return card;
     }
     
-    public static ArrayList<Promotions> getAllPromotions() {
-//        return list of users from db
-        ArrayList<Promotions> promotion = new ArrayList<>();
+    public static Card getCard(String cardType, int userID){
+        Card c = new Card();
+        String query = "SELECT * FROM CARD WHERE Type=? AND UID=?";
+        try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
+            PreparedStatement stmt = conn.prepareStatement(query);
+            stmt.setString(1, cardType);
+            stmt.setInt(2, userID);
 
-        String query = "SELECT * FROM USER";
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()){
+                c.setUID(rs.getInt("UID"));
+                c.setType(rs.getString("Type"));
+                c.setExpiry(rs.getDate("Expiry"));
+                c.setPoints(rs.getInt("Points"));
+                c.setCardNo(rs.getInt("CardNo"));
+            }
+            rs.close();
+//            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return c;
+    }
+
+    public static ArrayList<Card> getUserCards(int userID){
+        ArrayList<Card> card = new ArrayList<>();
+        String query = "SELECT * FROM CARD WHERE UID=?";
+        try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
+            PreparedStatement stmt = conn.prepareStatement(query);
+            stmt.setInt(1, userID);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                Card c = new Card();
+                c.setUID(rs.getInt("UID"));
+                c.setType(rs.getString("Type"));
+                c.setExpiry(rs.getDate("Expiry"));
+                c.setPoints(rs.getInt("Points"));
+                c.setCardNo(rs.getInt("CardNo"));
+                card.add(c);
+            }
+            rs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return card;
+    }
+    
+    public static ArrayList<Promotion> getAllPromotions() {
+//        return list of users from db
+        ArrayList<Promotion> promotion = new ArrayList<>();
+
+        String query = "SELECT * FROM PROMOTIONS";
         try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
-                Promotions p = new Promotions();
-                p.setPromotionID(rs.getString("name"));
+                Promotion p = new Promotion();
+                p.setPromotionID(rs.getString("PromotionID"));
                 p.setType(rs.getString("Type"));
-                p.setPromotionType(rs.getString("id"));
-                p.setEligibilityPoints(rs.getInt("EligibilityPoints"));
+                p.setPromotionName(rs.getString("PromotionName"));
+                p.setEligiblePoints(rs.getInt("EligiblePoints"));
                 promotion.add(p);
             }
             rs.close();
@@ -212,6 +259,31 @@ public class DatabaseConnector {
 
         return promotion;
     }
+    
+    public static ArrayList<Promotion> getSelectPromotions(String type) {
+//        return list of specific promotions from db
+        ArrayList<Promotion> selectPromotion = new ArrayList<>();
+
+        String query = "SELECT * FROM PROMOTIONS WHERE Type = ?";
+        try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
+            PreparedStatement stmt = conn.prepareStatement(query);
+            stmt.setString(1, type);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                Promotion p = new Promotion();
+                p.setPromotionID(rs.getString("PromotionID"));
+                p.setType(rs.getString("Type"));
+                p.setPromotionName(rs.getString("PromotionName"));
+                p.setEligiblePoints(rs.getInt("EligiblePoints"));
+                selectPromotion.add(p);
+            }
+            rs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return selectPromotion;
+    }
 
     /**
      * Delete given user from database
@@ -220,7 +292,7 @@ public class DatabaseConnector {
      * 
      */
     public static void deleteUser(User u) {
-        String query = "delete from USER where id = ?";
+        String query = "delete from USER where UID = ?";
 
         try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
             PreparedStatement stmt = conn.prepareStatement(query);
@@ -232,7 +304,7 @@ public class DatabaseConnector {
     }
     
     public static void deleteCard(Card c){
-        String query = "delete from CARD where id = ?";
+        String query = "delete from CARD where cardNo = ?";
 
         try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
             PreparedStatement stmt = conn.prepareStatement(query);
@@ -243,12 +315,12 @@ public class DatabaseConnector {
         }
     }
     
-    public static void deletePromotion(Promotions p) {
-        String query = "delete from PROMOTION where id = ?";
+    public static void deletePromotion(Promotion p) {
+        String query = "delete from PROMOTION where PromotionID = ?";
 
         try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
             PreparedStatement stmt = conn.prepareStatement(query);
-            stmt.setInt(1, p.getPromotionID());
+            stmt.setString(1, p.getPromotionID());
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -261,7 +333,7 @@ public class DatabaseConnector {
      * @param newUser modified user details to be added
      */
     public static void editUser(User oldUser, User newUser) {
-        String query = "UPDATE USER SET name=?, email=?, DOB=?, password=?, id=? WHERE id=?";
+        String query = "UPDATE USER SET Name=?, Email=?, DOB=?, Password=?, UID=? WHERE UID=?";
 
         try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
             PreparedStatement stmt = conn.prepareStatement(query);
@@ -277,30 +349,30 @@ public class DatabaseConnector {
     }
     
     public static void editCard(Card oldCard, Card newCard) {
-        String query = "UPDATE CARD SET cardNo=?, type=?, expiry=?, UID=?, points=? WHERE id=?";
+        String query = "UPDATE CARD SET CardNo=?, type=?, expiry=?, UID=? WHERE CardNo=?";
 
         try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
             PreparedStatement stmt = conn.prepareStatement(query);
-            stmt.setInt(1, newCard.getUID());
+            stmt.setInt(1, newCard.getCardNo());
             stmt.setString(2, newCard.getType());
-            stmt.setInt(3, oldCard.getCardNo());
-            stmt.setDate(4, new java.sql.Date(newCard.getExpiry().getTime())); //new java.sql.Date(newCard.getExpiry().getTime()));
-            stmt.setInt(5, newCard.getPoints());
+            stmt.setDate(3, new java.sql.Date(newCard.getExpiry().getTime())); //new java.sql.Date(newCard.getExpiry().getTime()));
+            stmt.setInt(4, newCard.getUID());
+            stmt.setInt(5, oldCard.getCardNo());
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
     
-    public static void editPromotion(Promotions oldPromotion, Promotions newPromotion) {
-        String query = "UPDATE PROMOTION SET promotion_id=?, type=?, eligiblepoints=?, promotionName= ? WHERE id=?";
+    public static void editPromotion(Promotion oldPromotion, Promotion newPromotion) {
+        String query = "UPDATE PROMOTION SET PromotionID=?, Type=?, EligiblePoints=?, PromotionName= ? WHERE PromotionID=?";
 
         try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setString(1, newPromotion.getType());
-            stmt.setInt(2, newPromotion.getEligibilityPoints());
-            stmt.setInt(3, oldPromotion.getPromotionID());
-            stmt.setString(4, newPromotion.getPromotionType());
+            stmt.setInt(2, newPromotion.getEligiblePoints());
+            stmt.setString(3, oldPromotion.getPromotionID());
+            stmt.setString(4, newPromotion.getPromotionName());
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
