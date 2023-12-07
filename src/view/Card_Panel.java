@@ -26,6 +26,7 @@ import javax.swing.JPanel;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Pattern;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import model.User;
@@ -572,15 +573,25 @@ public class Card_Panel extends javax.swing.JPanel {
         } else if(this.editTimHortonsButton.getText().equals("Submit")){
             /** Setting the button back to 'Edit card '. */
             this.editTimHortonsButton.setText("Edit Card");
-            // Now we have to do the validations for the updated values
             
+            
+            // Now we have to do the validations for the updated values
+            String numericString = "[0-9]*";
+            Pattern regexCardNoPattern = Pattern.compile(numericString);
             // Validations for the card number
             if(this.Card_NoFeild1.getText().isEmpty()){
                 JOptionPane.showMessageDialog(this, "Please enter the card number before submitting.", "Card Number is required!", JOptionPane.ERROR_MESSAGE);
+                /** Display Card panel again. */
+                redesignCardPanel();
+                
+            } else if(!regexCardNoPattern.matcher(Card_NoFeild1.getText()).matches()){
+                JOptionPane.showMessageDialog(this, "Please enter a numeric value for card number before submitting.", "Card No is a Number!", JOptionPane.ERROR_MESSAGE);
+                redesignCardPanel();
             }
             // Valdations for the expiry date
             else if(this.expiry1.getText().isEmpty()){
                 JOptionPane.showMessageDialog(this, "Please enter the expiry date before submitting.", "Expiry Date is required!", JOptionPane.ERROR_MESSAGE);
+                redesignCardPanel();
             } else{
                 try {
                     /** First get the old card from the database */
@@ -597,9 +608,10 @@ public class Card_Panel extends javax.swing.JPanel {
                     /** Although we need to keep edit button enabled */
                     this.editTimHortonsButton.setEnabled(true);
                 } catch (ParseException ex) {
-                    /** This would occur if there if there is no text in the expiry. */
-                    Logger.getLogger(Card_Panel.class.getName()).log(Level.SEVERE, null, ex);
-                    JOptionPane.showMessageDialog(this, ex.getMessage(), "Something went really wrong!", HEIGHT);
+                    /** This would occur if there if the expiry is in the wrong format. */
+//                    Logger.getLogger(Card_Panel.class.getName()).log(Level.SEVERE, null, ex);
+                    JOptionPane.showMessageDialog(this, "Please enter the date in the format 'YYYY-MM-DD'.", "Expiry Date Error!", HEIGHT);
+                    redesignCardPanel();
                 }
             }
             
@@ -713,6 +725,13 @@ public class Card_Panel extends javax.swing.JPanel {
         } catch(IOException e){
             
         }
+    }
+    
+    public void redesignCardPanel(){
+        Card_Panel newCardPanel = new Card_Panel(BottomPanel);
+        BottomPanel.add(newCardPanel);
+        CardLayout layout = (CardLayout) BottomPanel.getLayout();
+        layout.next(BottomPanel);
     }
 
 }        
