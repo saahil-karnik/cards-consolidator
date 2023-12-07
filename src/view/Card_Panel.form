@@ -534,6 +534,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Edit Card"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="editTimHortonsButtonActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

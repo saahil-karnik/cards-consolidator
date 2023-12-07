@@ -17,12 +17,15 @@ import java.io.IOException;
 import static java.lang.Math.random;
 import static java.lang.StrictMath.random;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import model.User;
@@ -255,6 +258,11 @@ public class Card_Panel extends javax.swing.JPanel {
 
         editTimHortonsButton.setFont(new java.awt.Font("Annai MN", 0, 13)); // NOI18N
         editTimHortonsButton.setText("Edit Card");
+        editTimHortonsButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editTimHortonsButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -547,6 +555,56 @@ public class Card_Panel extends javax.swing.JPanel {
         layout.next(BottomPanel);
         
     }//GEN-LAST:event_deleteButtonActionPerformed
+
+    /**
+     * This button sets the editable text fields to become enabled.
+     * After clicking this the edit button becomes a submit button.
+     * Once submitted, the updated entries get updated into the database.
+     * @param evt Java Action Click event
+     * @author group4
+     * @version 1.0
+     */
+    private void editTimHortonsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editTimHortonsButtonActionPerformed
+        if((!this.Card_NoFeild1.isEnabled()) && (!this.expiry1.isEnabled())){
+            this.Card_NoFeild1.setEnabled(true);
+            this.expiry1.setEnabled(true);
+            this.editTimHortonsButton.setText("Submit");
+        } else if(this.editTimHortonsButton.getText().equals("Submit")){
+            /** Setting the button back to 'Edit card '. */
+            this.editTimHortonsButton.setText("Edit Card");
+            // Now we have to do the validations for the updated values
+            
+            // Validations for the card number
+            if(this.Card_NoFeild1.getText().isEmpty()){
+                JOptionPane.showMessageDialog(this, "Please enter the card number before submitting.", "Card Number is required!", JOptionPane.ERROR_MESSAGE);
+            }
+            // Valdations for the expiry date
+            else if(this.expiry1.getText().isEmpty()){
+                JOptionPane.showMessageDialog(this, "Please enter the expiry date before submitting.", "Expiry Date is required!", JOptionPane.ERROR_MESSAGE);
+            } else{
+                try {
+                    /** First get the old card from the database */
+                    Card existingCard, newCard = new Card();
+                    existingCard = DatabaseConnector.getCard("Tim Hortons", 1);
+                    newCard.setCardNo(Integer.parseInt(this.Card_NoFeild1.getText()));
+                    newCard.setType(this.Card_textFeild.getText());
+                    newCard.setUID(1);
+                    newCard.setExpiry(this.dateFormat.parse(this.expiry1.getText()));
+                    DatabaseConnector.editCard(existingCard, newCard);
+                    JOptionPane.showMessageDialog(this, "You Card has been edited.", "Success!", JOptionPane.PLAIN_MESSAGE);
+                    /** now graying out all the boxes. */
+                    this.disableAllTextFields();
+                    /** Although we need to keep edit button enabled */
+                    this.editTimHortonsButton.setEnabled(true);
+                } catch (ParseException ex) {
+                    /** This would occur if there if there is no text in the expiry. */
+                    Logger.getLogger(Card_Panel.class.getName()).log(Level.SEVERE, null, ex);
+                    JOptionPane.showMessageDialog(this, ex.getMessage(), "Something went really wrong!", HEIGHT);
+                }
+            }
+            
+        }
+    }//GEN-LAST:event_editTimHortonsButtonActionPerformed
  // ActionListener for the card image click
     
 //public void addCard(user user) {
