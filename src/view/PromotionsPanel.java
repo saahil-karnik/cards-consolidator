@@ -24,6 +24,22 @@ public class PromotionsPanel extends javax.swing.JPanel {
     public PromotionsPanel(JPanel bottomPanel) {
         this.bottomPanel = bottomPanel;
         initComponents();
+        promotionsTitleLabel.setText("Top Promotions!");
+
+        /** First set all the promotion labels to visible */
+        setAllPromotionLabelsHidden();
+        
+        ArrayList <Promotion> allPromotions = new ArrayList<Promotion>();
+        allPromotions = DatabaseConnector.getAllPromotions();
+        this.displayPromotionsInLabels(allPromotions);
+        
+        promotionTypeLabel1.setVisible(true);
+        promotionTypeLabel2.setVisible(true);
+        promotionTypeLabel3.setVisible(true);
+        
+        promotionTypeLabel1.setText(allPromotions.get(0).getType());
+        promotionTypeLabel2.setText(allPromotions.get(1).getType());
+        promotionTypeLabel3.setText(allPromotions.get(2).getType());
     }
 
     /**
@@ -50,6 +66,9 @@ public class PromotionsPanel extends javax.swing.JPanel {
         promotionEligibilityLabel2 = new javax.swing.JLabel();
         promotionMessageLabel3 = new javax.swing.JLabel();
         promotionEligibilityLabel3 = new javax.swing.JLabel();
+        promotionTypeLabel1 = new javax.swing.JLabel();
+        promotionTypeLabel2 = new javax.swing.JLabel();
+        promotionTypeLabel3 = new javax.swing.JLabel();
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -148,6 +167,15 @@ public class PromotionsPanel extends javax.swing.JPanel {
         promotionEligibilityLabel3.setFont(new java.awt.Font("Annai MN", 0, 12)); // NOI18N
         promotionEligibilityLabel3.setText("Promotion Eligibility");
 
+        promotionTypeLabel1.setFont(new java.awt.Font("Annai MN", 0, 12)); // NOI18N
+        promotionTypeLabel1.setText("Promotion From");
+
+        promotionTypeLabel2.setFont(new java.awt.Font("Annai MN", 0, 12)); // NOI18N
+        promotionTypeLabel2.setText("Promotion From");
+
+        promotionTypeLabel3.setFont(new java.awt.Font("Annai MN", 0, 12)); // NOI18N
+        promotionTypeLabel3.setText("Promotion From");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -159,6 +187,9 @@ public class PromotionsPanel extends javax.swing.JPanel {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(153, 153, 153)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(promotionTypeLabel3)
+                    .addComponent(promotionTypeLabel2)
+                    .addComponent(promotionTypeLabel1)
                     .addComponent(promotionEligibilityLabel3)
                     .addComponent(promotionMessageLabel3)
                     .addComponent(promotionEligibilityLabel2)
@@ -176,15 +207,21 @@ public class PromotionsPanel extends javax.swing.JPanel {
                 .addComponent(promotionMessageLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(promotionEligibilityLabel1)
-                .addGap(75, 75, 75)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(promotionTypeLabel1)
+                .addGap(50, 50, 50)
                 .addComponent(promotionMessageLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(promotionEligibilityLabel2)
-                .addGap(75, 75, 75)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(promotionTypeLabel2)
+                .addGap(50, 50, 50)
                 .addComponent(promotionMessageLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(promotionEligibilityLabel3)
-                .addContainerGap(109, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(promotionTypeLabel3)
+                .addContainerGap(84, Short.MAX_VALUE))
         );
 
         jSplitPane1.setRightComponent(jPanel2);
@@ -255,8 +292,19 @@ public class PromotionsPanel extends javax.swing.JPanel {
         promotionsTitleLabel.setText("Top Promotions!");
 
         /** First set all the promotion labels to visible */
-        setAllPromotionLabelsVisible();
+        setAllPromotionLabelsHidden();
         
+        ArrayList <Promotion> allPromotions = new ArrayList<Promotion>();
+        allPromotions = DatabaseConnector.getAllPromotions();
+        this.displayPromotionsInLabels(allPromotions);
+        
+        promotionTypeLabel1.setVisible(true);
+        promotionTypeLabel2.setVisible(true);
+        promotionTypeLabel3.setVisible(true);
+        
+        promotionTypeLabel1.setText(allPromotions.get(0).getType());
+        promotionTypeLabel2.setText(allPromotions.get(1).getType());
+        promotionTypeLabel3.setText(allPromotions.get(2).getType());
         /** Displaying the promotions into the labels */
 //        displayPromotionsInLabels(allCardPromotions);
     }//GEN-LAST:event_allCardsButtonActionPerformed
@@ -275,6 +323,9 @@ public class PromotionsPanel extends javax.swing.JPanel {
     private javax.swing.JLabel promotionMessageLabel1;
     private javax.swing.JLabel promotionMessageLabel2;
     private javax.swing.JLabel promotionMessageLabel3;
+    private javax.swing.JLabel promotionTypeLabel1;
+    private javax.swing.JLabel promotionTypeLabel2;
+    private javax.swing.JLabel promotionTypeLabel3;
     private javax.swing.JLabel promotionsTitleLabel;
     private javax.swing.JButton starbucksPromoButton;
     private javax.swing.JButton timHortonsButton;
@@ -332,10 +383,13 @@ public class PromotionsPanel extends javax.swing.JPanel {
     public void setAllPromotionLabelsHidden(){
         promotionMessageLabel1.setVisible(false);
         promotionEligibilityLabel1.setVisible(false);
+        promotionTypeLabel1.setVisible(false);
         promotionMessageLabel2.setVisible(false);
         promotionEligibilityLabel2.setVisible(false);
+        promotionTypeLabel2.setVisible(false);
         promotionMessageLabel3.setVisible(false);
         promotionEligibilityLabel3.setVisible(false);
+        promotionTypeLabel3.setVisible(false);
     }
     
     public void displayPromotionsInLabels(ArrayList <Promotion> cardPromotions){
