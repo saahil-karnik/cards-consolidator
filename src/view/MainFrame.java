@@ -4,13 +4,14 @@
  */
 package view;
 
+import LoginPanel.LoginMainFrame;
 import java.awt.CardLayout;
 import java.util.ArrayList;
 import model.Card;
 import utility.DatabaseConnector;
 
 /**
- *
+ * Main Frame after the user has logged in successfully.
  * @author team4
  */
 public class MainFrame extends javax.swing.JFrame {
@@ -20,6 +21,20 @@ public class MainFrame extends javax.swing.JFrame {
      */
     public MainFrame() {
         initComponents();
+        ArrayList <Card> userCards = DatabaseConnector.getUserCards(1);
+        if(userCards.isEmpty()){
+//            System.out.println("Empty No cards");
+//            System.out.println(userCards);
+            NoCardPanel noCardPanel = new NoCardPanel(bottomPanel);
+            bottomPanel.add(noCardPanel);
+            CardLayout layout = (CardLayout) bottomPanel.getLayout();
+            layout.next(bottomPanel);
+        } else{
+            Card_Panel newcardPanel = new Card_Panel(bottomPanel);
+            bottomPanel.add(newcardPanel);
+            CardLayout layout = (CardLayout) bottomPanel.getLayout();
+            layout.next(bottomPanel);
+        }
     }
 
     /**
@@ -35,9 +50,8 @@ public class MainFrame extends javax.swing.JFrame {
         topPanel = new javax.swing.JPanel();
         cardsButton = new javax.swing.JButton();
         promotionsButton = new javax.swing.JButton();
-        logoutButton = new javax.swing.JButton();
         CCTitleLabel = new javax.swing.JLabel();
-        userFirstNameLabel = new javax.swing.JLabel();
+        logoutButton = new javax.swing.JButton();
         bottomPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -65,6 +79,10 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
+        CCTitleLabel.setFont(new java.awt.Font("Annai MN", 0, 18)); // NOI18N
+        CCTitleLabel.setForeground(new java.awt.Color(255, 255, 255));
+        CCTitleLabel.setText("CARDS CONSOLIDATOR");
+
         logoutButton.setFont(new java.awt.Font("Annai MN", 0, 13)); // NOI18N
         logoutButton.setForeground(new java.awt.Color(0, 102, 255));
         logoutButton.setText("Logout");
@@ -74,40 +92,28 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
-        CCTitleLabel.setFont(new java.awt.Font("Annai MN", 0, 18)); // NOI18N
-        CCTitleLabel.setForeground(new java.awt.Color(255, 255, 255));
-        CCTitleLabel.setText("CARDS CONSOLIDATOR");
-
-        userFirstNameLabel.setFont(new java.awt.Font("Annai MN", 0, 15)); // NOI18N
-        userFirstNameLabel.setForeground(new java.awt.Color(255, 255, 255));
-        userFirstNameLabel.setText("First Name");
-
         javax.swing.GroupLayout topPanelLayout = new javax.swing.GroupLayout(topPanel);
         topPanel.setLayout(topPanelLayout);
         topPanelLayout.setHorizontalGroup(
             topPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(topPanelLayout.createSequentialGroup()
-                .addGap(79, 79, 79)
-                .addGroup(topPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(topPanelLayout.createSequentialGroup()
-                        .addComponent(CCTitleLabel)
-                        .addGap(134, 134, 134)
-                        .addComponent(userFirstNameLabel))
-                    .addGroup(topPanelLayout.createSequentialGroup()
-                        .addComponent(cardsButton)
-                        .addGap(200, 200, 200)
-                        .addComponent(promotionsButton)
-                        .addGap(193, 193, 193)
-                        .addComponent(logoutButton)))
-                .addGap(80, 80, 80))
+                .addGap(301, 301, 301)
+                .addComponent(CCTitleLabel)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(topPanelLayout.createSequentialGroup()
+                .addGap(100, 100, 100)
+                .addComponent(cardsButton)
+                .addGap(179, 179, 179)
+                .addComponent(promotionsButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 202, Short.MAX_VALUE)
+                .addComponent(logoutButton)
+                .addGap(70, 70, 70))
         );
         topPanelLayout.setVerticalGroup(
             topPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(topPanelLayout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addGroup(topPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(CCTitleLabel)
-                    .addComponent(userFirstNameLabel))
+                .addComponent(CCTitleLabel)
                 .addGap(18, 18, 18)
                 .addGroup(topPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cardsButton)
@@ -137,10 +143,6 @@ public class MainFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_logoutButtonActionPerformed
-
     private void promotionsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_promotionsButtonActionPerformed
         PromotionsPanel newPromotionsPanel = new PromotionsPanel(bottomPanel);
         bottomPanel.add(newPromotionsPanel);
@@ -165,6 +167,12 @@ public class MainFrame extends javax.swing.JFrame {
             layout.next(bottomPanel);
         }
     }//GEN-LAST:event_cardsButtonActionPerformed
+
+    private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutButtonActionPerformed
+        LoginMainFrame loginMainFrame = new LoginMainFrame();
+        loginMainFrame.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_logoutButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -209,6 +217,5 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton logoutButton;
     private javax.swing.JButton promotionsButton;
     private javax.swing.JPanel topPanel;
-    private javax.swing.JLabel userFirstNameLabel;
     // End of variables declaration//GEN-END:variables
 }
