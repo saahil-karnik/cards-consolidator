@@ -189,7 +189,7 @@ public class RegistrationMainFrame extends javax.swing.JFrame {
         mainPanel2Layout.setHorizontalGroup(
             mainPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanel2Layout.createSequentialGroup()
-                .addGap(0, 164, Short.MAX_VALUE)
+                .addGap(164, 164, 164)
                 .addComponent(RegistrationPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(117, 117, 117))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanel2Layout.createSequentialGroup()
@@ -219,7 +219,7 @@ public class RegistrationMainFrame extends javax.swing.JFrame {
                             .addComponent(passwordErrorLabel)
                             .addComponent(emailErrorLabel)
                             .addComponent(nameErrorLabel))))
-                .addContainerGap(266, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         mainPanel2Layout.setVerticalGroup(
             mainPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -312,7 +312,7 @@ public class RegistrationMainFrame extends javax.swing.JFrame {
             newUser.setEmail(emailTextField.getText());
             newUser.setDOB(JDateChooser.getDate());
             newUser.setPassword(hashedPassword);
-
+            newUser.setId(1);
             
             //insert into DB
             DatabaseConnector.addUser(newUser);
