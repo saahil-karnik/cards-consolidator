@@ -240,7 +240,7 @@ public class DatabaseConnector {
 //        return list of users from db
         ArrayList<Promotion> promotion = new ArrayList<>();
 
-        String query = "SELECT * FROM PROMOTIONS";
+        String query = "SELECT * FROM PROMOTIONS ORDER BY EligiblePoints DESC";
         try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(query);
