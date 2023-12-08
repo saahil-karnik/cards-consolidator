@@ -80,7 +80,7 @@ public class New_card extends javax.swing.JPanel {
         jLabel2.setText("Card_Name:");
 
         Card_Name_combobox.setFont(new java.awt.Font("Annai MN", 0, 12)); // NOI18N
-        Card_Name_combobox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "StarBucks", "PC Optimum", "Tim Hortons", "Scene+" }));
+        Card_Name_combobox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "StarBucks", "PC Optimum", "Tim Hortons" }));
         Card_Name_combobox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Card_Name_comboboxActionPerformed(evt);
